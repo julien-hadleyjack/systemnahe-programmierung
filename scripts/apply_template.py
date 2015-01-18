@@ -16,7 +16,6 @@ from jinja2 import Environment, FileSystemLoader
 from docopt import docopt
 import os
 import sys
-import encoding
 
 # Add parent directory to the path.
 PARENT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
