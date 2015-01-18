@@ -12,7 +12,7 @@ build:
 
 	python scripts/transform_img_eps.py
 
-	latex -shell-escape "systemnahe-programmierung".tex
+	latex -shell-escape -interaction=nonstopmode "systemnahe-programmierung".tex
 	bibtex "systemnahe-programmierung"
 	latex -shell-escape "systemnahe-programmierung".tex
 	latex -shell-escape "systemnahe-programmierung".tex

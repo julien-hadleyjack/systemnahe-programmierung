@@ -1,6 +1,6 @@
 
 \RequirePackage[l2tabu, orthodox]{nag} % Complaints if syntax isn't right.
-\documentclass{  }
+\documentclass{% if font_size %}[{{ font_size }}]{% endif %}{ {{ document_class }} }
 
 \usepackage[utf8x]{inputenc}
 \usepackage{extsizes} % Allow for more sizes such as 14pt or 17pt on document class.
@@ -8,9 +8,16 @@
 \usepackage{amsfonts} % Allows \mathbb{R}, which is the real numbers symbol.
 \usepackage[export]{adjustbox} % Wraps \includegraphics with more keys (options).
 
+{% if algorithms_found %}
+% For writing pseudocode snippets: http://ctan.mackichan.com/macros/latex/contrib/algorithmicx/algorithmicx.pdf
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+{% endif %}
 
-
-
+{% if code_blocks_found %}
+% Uses pygments to make code beautiful: http://tug.ctan.org/tex-archive/macros/latex/contrib/minted/minted.pdf
+\usepackage{minted}  
+{% endif %}
 
 % Allows in place images.
 \usepackage{float}
@@ -19,7 +26,7 @@
 \usepackage{booktabs}
 \usepackage{longtable}
 
-\usepackage[]{geometry}
+\usepackage[{{ geometry_layout }}]{geometry}
 
 \usepackage{microtype} % Makes document more readable by optimizing space between letters.
 
@@ -31,12 +38,12 @@
 %%% New commands.
 
 % Don't output references in case they're empty - http://tex.stackexchange.com/questions/74476/how-to-avoid-empty-thebibliography-environment-bibtex-if-there-are-no-refere
-
+{% raw %}
 \let\myBib\thebibliography
 \let\endmyBib\endthebibliography
 
 \renewcommand\thebibliography[1]{\ifx\relax#1\relax\else\myBib{#1}\fi}
-
+{% endraw %}
 
 % Norm -> ||something||
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
@@ -47,7 +54,7 @@
 % Stdfig -> Used as \stdfig{width}{label_name}{caption}
 % Requires: image called 'caption' in img folder.
 % Output: A figure with the given width, labeled as 'fig:label_name'
-
+{% raw %}
 \newcommand{\stdfig}[3]{
     \begin{figure}
     \centering
@@ -56,13 +63,13 @@
     \label{fig:#2}
     \end{figure}
 }
-
+{% endraw %}
 
 
 % inplacefig -> Used as \inplacefig{width}{img_name}
 % Requires: image called 'caption' in img folder.
 % Output: an inplace figure with the given width, labeled as 'fig:label_name'.
-
+{% raw %}
 \newcommand{\inplacefig}[2]{
     \begin{figure}[H]
     \centering
@@ -70,7 +77,7 @@
     \label{fig:#2}
     \end{figure}
 }
-
+{% endraw %}
 
 
 
@@ -79,25 +86,58 @@
 
 
 %% Front page.
-%% Abstract page.
+{% if title -%}
+    \title{ {{ title }} }
 
+    {% if date and date != "\\today" %}
+    \renewcommand{\today}{ {{ date }} }
+    {% elif not date %}
+    \date{}
+    {% endif %}
+
+    {% if authors -%}
+        \author{
+            {% for author in authors -%}
+                {{ author }} \\
+            {% endfor -%}
+        }
+    {% endif %}
+
+    \maketitle
+
+\newpage
+{% endif -%}
+
+
+%% Abstract page.
+{% if abstract %}
+\begin{abstract}
+    {{ abstract }}
+\end{abstract}
+\newpage
+{% endif %}
 
 %% Table of contents page.
-
+{% if table_contents %}
+\tableofcontents
+\newpage
+{% endif %}
 
 
 %% Body start.
-
+{{body}}
 
 %% Body end.
 
 %% Bibliography.
+{% if put_bibliography_on_new_page %}
+\clearpage
+{% endif %}
 
-
-
+{% if not citations_found %}
     \nocite{*}
-
-\bibliographystyle{  }
+{% endif %}
+\bibliographystyle{ {{ bibliography_style }} }
 \bibliography{references}
 
 \end{document}

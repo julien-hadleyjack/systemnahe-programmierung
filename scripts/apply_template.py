@@ -39,7 +39,7 @@ def process_tex_file(input_path, template_name):
 
     g_layout = "top={0}, bottom={1}, left={2}, right={3}".format(top_margin, bot_margin, left_margin, right_margin)
 
-    env = Environment(loader=FileSystemLoader("./templates"))
+    env = Environment(loader=FileSystemLoader("./templates"), comment_start_string="{§", comment_end_string="§}")
     template = env.get_template(template_name)
     templated_text = template.render(body=body, citations_found=citations_found,
                                      algorithms_found=algorithms_found,
@@ -94,8 +94,8 @@ if __name__ == "__main__":
 
     processed_tex_file = process_tex_file(arguments["-i"], arguments["-t"])
 
-    with open(arguments["-o"], "w") as output_file:
-        output_file.write(processed_tex_file.encode("utf-8"))
+    with open(arguments["-o"], "w", encoding="utf-8") as output_file:
+        output_file.write(processed_tex_file)
 
 
 # { %endraw% }
