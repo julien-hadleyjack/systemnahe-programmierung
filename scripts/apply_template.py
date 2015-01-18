@@ -22,7 +22,7 @@ PARENT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.par
 sys.path.append(PARENT_DIR)
 from metadata import *
 
-SPACE_AFTER_FIRST_BRACKET_REG = re.compile(r"({ [\d\D]*?})")
+SPACE_AFTER_FIRST_BRACKET_REG = re.compile(r'({ [\d\D]*?})')
 SPACE_BEFORE_LAST_BRACKET_REG = re.compile(r"({[\d\D]*? })")
 SPACE_AROUND_BRACKETS_REG = re.compile(r"({ [\d\D]*? })")
 
@@ -91,9 +91,6 @@ def remove_spaces_at_positions(text, regex, positions):
 
 if __name__ == "__main__":
     arguments = docopt(__doc__)
-
-    # Solve a problem with the encoding of the metadata.
-    encoding.set_system_encoding_utf8()
 
     processed_tex_file = process_tex_file(arguments["-i"], arguments["-t"])
 
