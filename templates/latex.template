@@ -1,0 +1,103 @@
+
+\RequirePackage[l2tabu, orthodox]{nag} % Complaints if syntax isn't right.
+\documentclass{  }
+
+\usepackage[utf8x]{inputenc}
+\usepackage{extsizes} % Allow for more sizes such as 14pt or 17pt on document class.
+\usepackage{mathtools} % Allows conditional math expressions, etc.
+\usepackage{amsfonts} % Allows \mathbb{R}, which is the real numbers symbol.
+\usepackage[export]{adjustbox} % Wraps \includegraphics with more keys (options).
+
+
+
+
+
+% Allows in place images.
+\usepackage{float}
+
+% Pandoc table support.
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage[]{geometry}
+
+\usepackage{microtype} % Makes document more readable by optimizing space between letters.
+
+\usepackage{units} % Adds \nicefrac{1}{2}: (½), \unit[5]{m}{s}: 5 m/s.
+
+\usepackage[colorlinks=false, pdfborder={0 0 0}]{hyperref} % Allow clicking references and the table of contents in pdfs.
+\usepackage{cleveref} % Adds fig/formula etc. before references (use \cref).
+
+%%% New commands.
+
+% Don't output references in case they're empty - http://tex.stackexchange.com/questions/74476/how-to-avoid-empty-thebibliography-environment-bibtex-if-there-are-no-refere
+
+\let\myBib\thebibliography
+\let\endmyBib\endthebibliography
+
+\renewcommand\thebibliography[1]{\ifx\relax#1\relax\else\myBib{#1}\fi}
+
+
+% Norm -> ||something||
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+% Absolute value: \abs{something} -> |something|
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+
+% Stdfig -> Used as \stdfig{width}{label_name}{caption}
+% Requires: image called 'caption' in img folder.
+% Output: A figure with the given width, labeled as 'fig:label_name'
+
+\newcommand{\stdfig}[3]{
+    \begin{figure}
+    \centering
+    \includegraphics[width = #1]{img/#2.eps}
+    \caption{#3}
+    \label{fig:#2}
+    \end{figure}
+}
+
+
+
+% inplacefig -> Used as \inplacefig{width}{img_name}
+% Requires: image called 'caption' in img folder.
+% Output: an inplace figure with the given width, labeled as 'fig:label_name'.
+
+\newcommand{\inplacefig}[2]{
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width = #1]{img/#2.eps}
+    \label{fig:#2}
+    \end{figure}
+}
+
+
+
+
+\begin{document} 
+
+
+
+%% Front page.
+%% Abstract page.
+
+
+%% Table of contents page.
+
+
+
+%% Body start.
+
+
+%% Body end.
+
+%% Bibliography.
+
+
+
+    \nocite{*}
+
+\bibliographystyle{  }
+\bibliography{references}
+
+\end{document}
