@@ -28,5 +28,4 @@ def reload_apply_template():
 
 
 if __name__ == "__main__":
-    encoding.set_system_encoding_utf8()
     main()
