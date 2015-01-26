@@ -19,7 +19,7 @@ build:
 	python scripts/apply_template.py template -i "chapters-latex" -t overview.tex "systemnahe-programmierung.tex" \
 															 	  -t customsettings.sty "special-generated/customsettings.sty" \
 
-	python scripts/transform_img_eps.py
+	# python scripts/transform_img_eps.py
 
 	latex -shell-escape -interaction=nonstopmode -halt-on-error -file-line-error "systemnahe-programmierung".tex > /dev/null 2>&1 || true
 	bibtex "systemnahe-programmierung" || true
