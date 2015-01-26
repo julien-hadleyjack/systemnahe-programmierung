@@ -3,7 +3,7 @@ from PIL import Image
 
 
 def main():
-    directory = "img" + os.path.sep
+    directory = "images" + os.path.sep
     for full_name in get_images_names():
         img = Image.open(directory + full_name)
         if img.mode not in ("L", "RGB", "CMYK"):
@@ -19,7 +19,7 @@ def main():
 def get_images_names():
     names = []
     extensions = ["png"]
-    for file_ in os.listdir("img"):
+    for file_ in os.listdir("images"):
         extension = file_.split(".")[-1]
         if extension in extensions:
             names.append(file_)

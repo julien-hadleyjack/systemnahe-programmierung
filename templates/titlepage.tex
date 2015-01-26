@@ -1,0 +1,29 @@
+%!TEX root = ../praxisbericht-docker.tex
+
+\begin{titlepage}
+    \enlargethispage{20mm}
+    \begin{center}
+        \vspace*{-2cm}
+\includegraphics[height=2cm]{images/1und1-logo}\hfill\includegraphics[height=2cm]{images/dhbw-logo}\\[2cm]
+        \vspace*{12mm}  {\LARGE\bf {{ title }} }\\
+        \vspace*{12mm}  {\large\bf {{ arbeit }} }\\
+        \vspace*{12mm}  {{ snippets['deckblattabschlusshinleitung'] }} \\
+        \vspace*{3mm}       {\bf {{ abschluss }} }\\
+    \vspace*{12mm}  {{ snippets['artikelstudiengang'] }} {{ studiengang }}\\
+    \vspace*{3mm}       {{ snippets['anderdh'] }} {{ dhbw_standort }}\\
+        \vspace*{12mm}  {{ snippets['von'] }}\\
+        \vspace*{3mm}       {\large\bf {{ author }} }\\
+        \vspace*{12mm}  {{ date }}\\
+    \end{center}
+    \vfill
+    \begin{spacing}{1.2}
+    \begin{tabbing}
+        mmmmmmmmmmmmmmmmmmmmmmmmmm                                         \= \kill
+        \textbf{ {{ snippets['dbbearbeitungszeit'] }} }                    \>  {{ zeitraum }}\\
+        \textbf{ {{ snippets['dbmatriknr'] }}, {{ snippets['dbkurs'] }} }  \>  {{ matrikel_nr }}, {{ kurs }}\\
+        \textbf{ {{ snippets['dbfirma'] }} }                               \>  {{ firma }}, {{ firmen_standort }}\\
+        \textbf{ {{ snippets['dbbetreuer'] }} }                            \>  {{ betreuer }}\\
+        \textbf{ {{ snippets['dbgutachter'] }} }                           \>  {{ gutachter }}
+    \end{tabbing}
+    \end{spacing}
+\end{titlepage}

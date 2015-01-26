@@ -1,0 +1,237 @@
+% Translates input encodings into a 'LATEX internal language’.
+% http://www.ctan.org/pkg/inputenc
+\usepackage[utf8]{inputenc}
+
+% Select font encodings and enables hyphenation for every character in the font
+% Use \hyphenation{Ver-stärker-aus-gang} to define own hyphenation rules
+% http://www.ctan.org/pkg/fontenc
+\usepackage[T1]{fontenc}
+
+% Typographical rules (hyphenation,..).
+% Use \selectlanguage or \begin so switch languages
+% http://www.ctan.org/pkg/babel
+\usepackage[english,ngerman]{babel}
+
+
+% Avoid widows and clubs during hyphenation
+% http://projekte.dante.de/DanteFAQ/Silbentrennung
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+
+% Customize page layout
+% http://www.ctan.org/pkg/geometry
+\usepackage[{{ page_layout }}]{geometry}
+
+% Micro-typgraphic extension (character protrusion, font expansion, adjustment of kerning)
+% http://ctan.org/pkg/microtype
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+
+% Spacing between lines (options: singlespacing, onehalfspacing, doublespacing)
+% http://ctan.org/pkg/setspace
+\usepackage[onehalfspacing]{setspace}
+
+% Creating indexes
+% Use \index{key} to add to index; \makeindex and \printindex to show it
+% http://www.ctan.org/pkg/makeidx, http://en.wikibooks.org/wiki/LaTeX/Indexing
+\usepackage{makeidx}
+
+% Advanced options for inline and display quotations
+% http://www.ctan.org/pkg/csquotes
+\usepackage[autostyle=true,         % continuously adapts the qute style to the current language
+            german=quotes           %	
+]{csquotes}
+
+% Driver independent access to colors (see also color)
+% http://www.ctan.org/pkg/xcolor
+% \usepackage{xcolor}
+
+% Enhanced support for graphics
+% http://ctan.org/pkg/graphicx
+\usepackage{graphicx}
+{% raw %}
+\graphicspath{chapters-markdown/}
+{% endraw %}
+
+% Improved interface for floating objects (figures, tables)
+% also adds [H] as a placement option (here, definitely)
+% http://www.ctan.org/pkg/float
+\usepackage{float}
+
+% Tables that continue to the next page
+% http://www.ctan.org/pkg/longtable
+\usepackage{longtable}
+
+% enhances the quality of tables
+% http://www.ctan.org/pkg/booktabs
+% \usepackage{booktabs}
+
+% Extending the array and tabular environments
+% http://www.ctan.org/pkg/array
+\usepackage{array}
+
+\setlength{\tabcolsep}{ {{ column_spacing }} }      % space between columns (6pt standard)
+\renewcommand{\arraystretch}{ {{ row_spacing }} }   % space between rows (1 standard)
+
+% Change the typesettinf of footnotes
+% http://www.ctan.org/pkg/footmisc
+\usepackage[perpage,                % resetzs footnote numbering for each page
+            hang,                   % sets footnote mark flush with margin, body at indentation of \footnotemargin
+            multiple,               % comma seperates multiple footnotes in text
+            stable                  % footnotes in titles will not be shown in headers, toc
+]{footmisc}
+
+% Expands acronyms at least once
+% http://www.ctan.org/pkg/acronym
+\usepackage[printonlyused,          % omits defined acronyms that weren't used
+            %withpage               % add the page number of the first use
+            footnote                % prints the full name the first time in the footnote
+]{acronym}
+
+% Create glossaries and lists of acronyms
+% http://www.ctan.org/pkg/glossaries
+\usepackage[%nonumberlist,	% supresses a list of entry locations
+			toc				% adds the glossaries to the toc
+]{glossaries}
+% http://tex.stackexchange.com/questions/224072/how-to-install-language-modules-for-the-glossaries-package
+
+{#
+% typset source code listings
+% http://www.ctan.org/pkg/listings
+% \usepackage{listings}
+% \definecolor{LinkColor}{HTML}{00007A}
+% \definecolor{ListingBackground}{HTML}{FCF7DE}
+% \lstset{%
+% 		language=Java,			% Standardsprache des Quellcodes
+% 		%numbers=left,			% Zeilennummern links
+% 		stepnumber=1,			% Jede Zeile nummerieren.
+% 		numbersep=5pt,			% 5pt Abstand zum Quellcode
+% 		numberstyle=\tiny,		% Zeichengrösse 'tiny' für die Nummern.
+% 		breaklines=true,		% Zeilen umbrechen wenn notwendig.
+% 		breakautoindent=true,	% Nach dem Zeilenumbruch Zeile einrücken.
+% 		postbreak=\space,		% Bei Leerzeichen umbrechen.
+% 		tabsize=2,				% Tabulatorgrösse 2
+% 		basicstyle=\ttfamily\footnotesize, % Nichtproportionale Schrift, klein für den Quellcode
+% 		showspaces=false,		% Leerzeichen nicht anzeigen.
+% 		showstringspaces=false,	% Leerzeichen auch in Strings ('') nicht anzeigen.
+% 		extendedchars=true,		% Alle Zeichen vom Latin1 Zeichensatz anzeigen.
+% 		captionpos=b,			% sets the caption-position to bottom
+% 		backgroundcolor=\color{ListingBackground}, % Hintergrundfarbe des Quellcodes setzen.
+% 		xleftmargin=0pt,		% Rand links
+% 		xrightmargin=0pt,		% Rand rechts
+% 		frame=single,			% Rahmen an
+% 		frameround=ffff,
+% 		rulecolor=\color{darkgray},	% Rahmenfarbe
+% 		fillcolor=\color{ListingBackground}
+% }
+% 
+% \lstloadlanguages{PHP,Python,Java,C,C++,bash}
+#}
+
+\usepackage{ {{ font_type }} }
+
+% Show realistic quotes in varbatim
+% http://www.ctan.org/pkg/upquote
+\usepackage{upquote}
+
+% Make the font size in captions smaller
+\addtokomafont{caption}{\small}
+
+% Bibliographies
+% http://www.ctan.org/pkg/biblatex
+\usepackage[backend=biber,          % if problems exist, switch to biblatex
+            bibwarn=true,           % report warnings issued by the backend
+            bibencoding=utf8,       % specifies the encoding of the bib files (else ascii)
+            {%- if snippets["language"] == "german" %}
+            sortlocale=de_DE,       % global sorting locale
+            {%- elif snippets["language"] == "english" %}
+            sortlocale=en_US,
+            {%- endif %}
+            style=alphabetic  %Zitierstil. Siehe http://ctan.mirrorcatalogs.com/macros/latex/contrib/biblatex/doc/biblatex.pdf
+]{biblatex}
+
+{% for file in bib_files %}
+\addbibresource{ {{ file }} }
+{% endfor %}
+
+
+
+%%********************************************
+%% Math packages
+%%********************************************
+
+% Simple arithmetic in commands
+% Used in the title page so might not be needed
+% http://www.ctan.org/pkg/calc
+% \usepackage{calc}
+
+% Usefiul tools for mathematical typesetting
+% http://www.ctan.org/pkg/mathtools
+% \usepackage{mathtools}
+
+% Foreground and background color managment
+% http://www.ctan.org/pkg/color
+\usepackage{color}
+
+% Sophisticated verbatim text
+% http://www.ctan.org/pkg/fancyvrb
+\usepackage{fancyvrb}
+
+% syntax highlighting
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+{% raw %}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+\newcommand{\RegionMarkerTok}[1]{{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\NormalTok}[1]{{#1}}
+{% endraw %}
+
+
+{#
+
+{% if code_blocks_found %}
+% Uses pygments to make code beautiful: http://tug.ctan.org/tex-archive/macros/latex/contrib/minted/minted.pdf
+\usepackage{minted}  
+{% endif %}
+
+
+% \usepackage[colorlinks=false, pdfborder={0 0 0}]{hyperref} % Allow clicking references and the table of contents in pdfs.
+\usepackage{cleveref} % Adds fig/formula etc. before references (use \cref).
+#}
+
+{#
+These are the settings from pandoc
+#}
+{% raw %}
+%\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+
+{% endraw %}
+
+% framed or shaded regions that can break across pages
+% http://www.ctan.org/pkg/framed
+\usepackage{framed}

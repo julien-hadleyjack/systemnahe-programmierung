@@ -1,5 +1,4 @@
 import requests
-import encoding
 
 LATEX_TEMPLATE_URL = "https://raw.githubusercontent.com/Skabed/cookiecutter-latex-markdown/master/%7B%7Bcookiecutter.name%7D%7D/templates/latex.template"
 APPLY_TEMPLATE_URL = "https://raw.githubusercontent.com/Skabed/cookiecutter-latex-markdown/master/%7B%7Bcookiecutter.name%7D%7D/scripts/apply_template.py"

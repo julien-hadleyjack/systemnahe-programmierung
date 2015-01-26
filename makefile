@@ -1,22 +1,31 @@
 
+
 initialize:
 	python scripts/initialize.py
 
 build:
-	pandoc -f markdown -t latex "systemnahe-programmierung.md" > "systemnahe-programmierung.tex"
+	python scripts/apply_template.py template -i "chapters-latex" -t chapter-template.tex "special-generated/chapter-template.tex"
+
+	for f in chapters-markdown/*.md; do \
+		filename=`basename $$f .md`; \
+		pandoc -f markdown --chapters --template special-generated/chapter-template.tex -t latex chapters-markdown/$$filename.md -o chapters-latex/$$filename.tex; \
+	done
 	# Use listings.
 	# sed -i -e 's/\\begin{verbatim}/\\begin{minipage}\{0\.95\\textwidth}\\begin{lstlisting}/g' "systemnahe-programmierung"}}.tex
 	# sed -i -e 's/\\end{verbatim}/\\end{lstlisting}\\end{minipage}/g' "systemnahe-programmierung"}}.tex
 
-	python scripts/apply_template.py -i "systemnahe-programmierung.tex" -o "systemnahe-programmierung.tex" -t latex.template
+	python scripts/apply_template.py transform -i "chapters-latex"
+
+	python scripts/apply_template.py template -i "chapters-latex" -t overview.tex "systemnahe-programmierung.tex" \
+															 	  -t customsettings.sty "special-generated/customsettings.sty" \
 
 	python scripts/transform_img_eps.py
 
-	latex -shell-escape -interaction=nonstopmode "systemnahe-programmierung".tex
-	bibtex "systemnahe-programmierung"
-	latex -shell-escape "systemnahe-programmierung".tex
-	latex -shell-escape "systemnahe-programmierung".tex
-	pdflatex -shell-escape "systemnahe-programmierung".tex
+	latex -shell-escape -interaction=nonstopmode -halt-on-error -file-line-error "systemnahe-programmierung".tex > /dev/null 2>&1 || true
+	bibtex "systemnahe-programmierung" || true
+	latex -shell-escape -interaction=nonstopmode -halt-on-error -file-line-error "systemnahe-programmierung".tex > /dev/null 2>&1 || true
+	latex -shell-escape -interaction=nonstopmode -halt-on-error -file-line-error "systemnahe-programmierung".tex > /dev/null 2>&1 || true
+	pdflatex -shell-escape -interaction=nonstopmode -halt-on-error -file-line-error "systemnahe-programmierung".tex
 
 debug:
 	$(MAKE) clean

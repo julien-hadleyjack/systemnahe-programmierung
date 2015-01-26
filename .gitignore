@@ -194,3 +194,10 @@ coverage.xml
 
 # Sphinx documentation
 docs/_build/
+
+*.pdf
+chapters-latex/
+ads/customsettings.sty
+systemnahe-programmierung.tex
+special-generated/
+systemnahe-programmierung.sublime-workspace

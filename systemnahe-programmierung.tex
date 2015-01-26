@@ -1,0 +1,151 @@
+% Warns the user when LateX is wrongly used
+% http://www.ctan.org/tex-archive/macros/latex/contrib/nag
+\RequirePackage[l2tabu, orthodox]{nag}
+
+% http://www.ctan.org/pkg/scrreprt
+\documentclass[
+    pagesize=pdftex,    % Page size is set with \pdfpagewidth and \pdfpageheight
+    twoside=false,      % Einseitiger Druck.
+    fontsize=12pt,      % Schriftgroesse
+    parskip=half,       % Halbe Zeile Abstand zwischen Absätzen.
+    headsepline,        % Linie nach Kopfzeile.
+    footsepline,        % Linie vor Fusszeile.
+    abstract=false,     % Abstract Überschriften
+    listof=totoc,       % show table of figures in toc but unnumbered
+    toc=bibliography,   % show bibliography in toc but unnumbered
+]{scrreprt}
+
+\usepackage{special-generated/customsettings}
+
+\title{Systemnahe Programmierung}
+\author{}
+\date{\today}
+
+% Support for hypertext links
+% http://www.ctan.org/pkg/hyperref
+\usepackage[%
+    pdftitle={Systemnahe Programmierung},                % text for PDF Title field 
+    pdfauthor={},              % text for PDF Author field 
+    pdfsubject={Systemnahe Programmierung},              % text for PDF Subject field 
+    pdfcreator={pdflatex, LaTeX with KOMA-Script},   % text for PDF Creator field 
+    pdfpagemode=UseOutlines,        % show bookmarks
+    pdflang={de},                   % language identifier (RFC 3066)
+    hidelinks,                      % hide links (no color, no border)
+    bookmarksnumbered=true,         % put section numbers in bookmarks
+    pdfdisplaydoctitle=true,        % display document title instead of file name in title bar
+]{hyperref}
+
+% A new bookmark (outline) organization for package hyperref
+% bookmarks are generated on first compile
+% http://www.ctan.org/pkg/bookmark
+% \usepackage{bookmark}
+
+%%% New commands.
+
+% Don't output references in case they're empty
+% http://tex.stackexchange.com/questions/74476/how-to-avoid-empty-thebibliography-environment-bibtex-if-there-are-no-refere
+
+
+
+% Stdfig -> Used as \stdfig{width}{label_name}{caption}
+% Requires: image called 'caption' in img folder.
+% Output: A figure with the given width, labeled as 'fig:label_name'
+
+\newcommand{\stdfig}[3]{
+    \begin{figure}
+    \centering
+    \includegraphics[width = #1]{img/#2.eps}
+    \caption{#3}
+    \label{fig:#2}
+    \end{figure}
+}
+
+
+
+% inplacefig -> Used as \inplacefig{width}{img_name}
+% Requires: image called 'img_name' in img folder.
+% Output: an inplace figure with the given width, labeled as 'fig:label_name'.
+
+\newcommand{\inplacefig}[2]{
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width = #1]{img/#2.eps}
+    \label{fig:#2}
+    \end{figure}
+}
+
+
+%\makeglossaries
+%\input{special/glossary}
+
+\begin{document}
+
+
+\selectlanguage{ngerman}
+
+
+
+%% Front page.
+\title{Systemnahe Programmierung}
+
+
+
+\author{
+        Julien Hadley Jack \\
+        Sebastian Dernbach \\
+       }
+
+
+\maketitle
+
+\newpage
+
+
+
+% Inhaltsverzeichnis
+\pagestyle{plain}
+%für die Anzeige von Unterkapiteln im Inhaltsverzeichnis: 2
+\setcounter{tocdepth}{2}
+\tableofcontents
+\newpage
+
+
+
+%% Body start.
+\include{chapters-latex/01_einleitung}
+\include{chapters-latex/02_geschichte}
+\include{chapters-latex/03_architektur}
+\include{chapters-latex/04_befehlssatz}
+\include{chapters-latex/05_entwicklungsumgebung}
+\include{chapters-latex/06_projektidee}
+\include{chapters-latex/07_implementierung}
+
+
+% Anhang
+\clearpage
+\pagenumbering{Roman}
+
+% Abbildungsverzeichnis
+\cleardoublepage
+\listoffigures
+
+%Tabellenverzeichnis
+\cleardoublepage
+\listoftables
+
+% Quellcodeverzeichnis
+% \cleardoublepage
+% \lstlistoflistings
+
+% Literaturverzeichnis
+\cleardoublepage
+\printbibliography
+
+% Abkürzungsverzeichnis
+\cleardoublepage
+\include{special/acronyms}
+
+% Glossar
+\printglossary[style=altlist,title=Glossar]
+
+\end{document}
