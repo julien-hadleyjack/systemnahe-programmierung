@@ -1,7 +1,9 @@
 # Einleitung #
 
-Test Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+Systemnahe Programmierung beschäftigt sich mit der Erstellung beziehungsweise Programmierung von Software, die Teil des Betriebssystemes oder sehr eng mit diesem verbunden sind.
 
-Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet,
+Die Software dient hierbei als Abstraktionsschicht zwischen Hardware und Betriebssystem, welche leichten Zugriff auf einfache Funktionen des Systems bietet. 
+Die Schicht bietet allerdings aus Sicherheitsgründen keinen Zugriff auf das Betriebssystem selbst, weshalb der Programmierer sich selbst um den Austausch von Daten kümmern muss. Gleichzeitig bedeutet dies, dass systemnahe Software fehleranfälliger und umständlicher ist. Was zunächst wie ein Nachteil erscheint, ist gleichzeitig jedoch auch ein Vorteil für die Software. Das Augenmerk des Programmierers muss somit nicht auf Funktionalität liegen sondern legt den Blickpunkt auf Werte wie Robustheit und Effizienz. 
+Was wiederum die Entwicklung erschwert, da keine fehlertoleranten und schnellen Schnittstellen zur Verfügung stehen.
 
-Dies ist ein Test, ob dillinger.io gut funktioniert.
+Systemnahe Software wird sehr oft in der Programmiersprache C geschrieben. Dies hat unter anderem den Grund, dass übersetzter C Code direkt auf einem Prozessor lauffähig ist und während der Laufzeit keine Überprüfung auf Programmierfehler statt findet. Außerdem finden während der Laufzeit auch keine Prüfungen der Datenzugriffe statt
