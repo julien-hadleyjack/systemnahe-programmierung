@@ -35,7 +35,7 @@ def generate_metadata(input_dir):
                 body += tex_file.read()
 
     return {
-        "files": [file[:-4] for file in os.listdir(input_dir) if file.endswith(".tex")],
+        "files": sorted(file[:-4] for file in os.listdir(input_dir) if file.endswith(".tex")),
         "citations_found": r"\cite{" in body,
         "code_blocks_found": r"\begin{minted}" in body,
         "page_layout": "top={0}, bottom={1}, left={2}, right={3}".format(top_margin, bot_margin, left_margin, right_margin)
