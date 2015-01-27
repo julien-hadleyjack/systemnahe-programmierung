@@ -3,7 +3,7 @@
 
 | Befehl     | Beschreibung                                     |
 |------------|--------------------------------------------------|
-| ACALL <addr11> | Ruft die Subroutine an der Adresse <addr11> auf |
+| ACALL \<addr11\> | Ruft die Subroutine an der Adresse \<addr11\> auf |
 | ADD <A>,<Operand> | Addiert den <Operand> zum Inhalt des Akkumulators <A> hinzu |
 | ADDC <A>,<Operand> | Addiert den <Operand> und das Übertragsbit zum Inhalt des Akkumulators <A> hinzu |
 | AJMP <addr11> | Springt zu Adresse <addr11> |
