@@ -31,7 +31,7 @@ def generate_metadata(input_dir):
     body = ""
     for file in os.listdir(input_dir):
         if file.endswith(".tex"):
-            with open(os.path.join(input_dir, file), "r") as tex_file:
+            with open(os.path.join(input_dir, file), "r", encoding="utf-8") as tex_file:
                 body += tex_file.read()
 
     return {
@@ -47,7 +47,7 @@ def process_chapter_files(input_dir):
     for file in os.listdir(input_dir):
         if file.endswith(".tex"):
             content = ""
-            with open(os.path.join(input_dir, file), "r") as tex_file:
+            with open(os.path.join(input_dir, file), "r", encoding="utf-8") as tex_file:
                 #content = apply_minted(tex_file.read())
                 content = apply_minted(tex_file.read())
             with open(os.path.join(input_dir, file), "w", encoding="utf-8") as tex_file:
