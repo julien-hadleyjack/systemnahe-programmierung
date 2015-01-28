@@ -17,4 +17,13 @@
 | `DJNZ <byte>,<rel>` | Dekrementiere `<byte>` um 1 und springe zu `<rel>` wenn das <byte>` nicht Null ist |
 | `INC <byte>/<DPTR>` | Inkrementiere `<byte>` bzw. `<DPTR>` um 1 |
 | `JB <bit>,<rel>` | Springe zu `<rel>`, wenn `<byte>` gesetzt ist (=1) |
+| `JBC <bit>,<rel>` | Springe zu `<rel>`, wenn `<byte>` gesetzt ist (=1) und lösche dieses anschließend |
+| `JC <rel>` | Springe zu `<rel>`, wenn das Übertragsbit gesetzt ist (=1) |
+| `JMP <A>+<DPTR>` | Addiere den Akkumulator `<A>` zum Datenanzeiger `<DPTR>` und lade das Ergebnis in den Programmzähler |
+| `JNB <bit>,<rel>` | Springe zu `<rel>`, wenn `<byte>` nicht gesetzt ist (=0) |
+| `JNC <rel>` | Springe zu `<rel>`, wenn das Übertragsbit nicht gesetzt ist (=0) |
+| `JNZ <rel>` | Springe zu `<rel>`, wenn der Akkumulator nicht Null ist |
+| `JZ <rel>` | Springe zu `<rel>`, wenn der Akkumulator Null ist |
+| `LCALL <addr16>` | Ruft bedingungslos Subroutine an der Adresse `<addr16>` auf |
+
 
