@@ -1,5 +1,6 @@
 
-# Befehlssatz #[^Befehlsatz]
+# Befehlssatz #
+[^Befehlsatz]
 
 | Befehl     | Beschreibung                                     |
 |------------|--------------------------------------------------|
