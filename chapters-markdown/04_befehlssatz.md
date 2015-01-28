@@ -15,7 +15,7 @@
 | `DEC <byte>` | Dekrementiere `<byte>` um 1 |
 | `DIV <A>,<B>` | Dividiere Akkumulator `<A>` durch Register `<B>` |
 | `DJNZ <byte>,<rel>` | Dekrementiere `<byte>` um 1 und springe zu `<rel>` wenn das `<byte>` nicht Null ist |
-| `INC <byte>/<DPTR>` | Inkrementiere `<byte>` bzw. `<DPTR>` um 1 |
+| `INC <byte>\/<DPTR>` | Inkrementiere `<byte>` bzw. `<DPTR>` um 1 |
 | `JB <bit>,<rel>` | Springe zu `<rel>`, wenn `<byte>` gesetzt ist (=1) |
 | `JBC <bit>,<rel>` | Springe zu `<rel>`, wenn `<byte>` gesetzt ist (=1) und lösche dieses anschließend |
 | `JC <rel>` | Springe zu `<rel>`, wenn das Übertragsbit gesetzt ist (=1) |
