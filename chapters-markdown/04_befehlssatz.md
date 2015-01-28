@@ -2,51 +2,102 @@
 # Befehlssatz #
 [^Befehlsatz]
 
-| Befehl     | Beschreibung                                     |
-|------------|--------------------------------------------------|
-| `ACALL <addr11>` | Ruft die Subroutine an der Adresse `<addr11>` auf |
-| `ADD <A>,<Operand>` | Addiert den `<Operand>` zum Inhalt des Akkumulators `<A>` hinzu |
-| `ADDC <A>,<Operand>` | Addiert den `<Operand>` und das Übertragsbit zum Inhalt des Akkumulators `<A>` hinzu |
-| `AJMP <addr11>` | Springt zu Adresse `<addr11>` |
-| `ANL <Zielbyte>,<Quellenbyte>` | Speichert eine bitweise logische UND-Verknüpfung zwischen dem `<Zielbyte>` und dem `<Quellenbyte>` im `<Zielbyte>` | 
-| `CJNE <Operand1>,<Operand2>,<rel>` | Springe zu `<rel>` falls die Werte `<Operand1>` und `<Operand2>` ungleich sind |
-| `CLR <bit>/<A>` | Löscht das Bit `<bit>` bzw. den Akkumulator `<A>` |
-| `CPL <bit>/<A>` | Komplementiert das Bit `<bit>` bzw. den Akkumulator `<A>` |
-| `DA <A>` | Korrigiere den Dezimalwert des Akkumulators `<A>` nach einer Addition |
-| `DEC <byte>` | Dekrementiere `<byte>` um 1 |
-| `DIV <A>,<B>` | Dividiere Akkumulator `<A>` durch Register `<B>` |
-| `DJNZ <byte>,<rel>` | Dekrementiere `<byte>` um 1 und springe zu `<rel>` wenn das `<byte>` nicht Null ist |
-| `INC <byte>/<DPTR>` | Inkrementiere `<byte>` bzw. `<DPTR>` um 1 |
-| `JB <bit>,<rel>` | Springe zu `<rel>`, wenn `<byte>` gesetzt ist (=1) |
-| `JBC <bit>,<rel>` | Springe zu `<rel>`, wenn `<byte>` gesetzt ist (=1) und lösche dieses anschließend |
-| `JC <rel>` | Springe zu `<rel>`, wenn das Übertragsbit gesetzt ist (=1) |
-| `JMP <A>+<DPTR>` | Addiere den Akkumulator `<A>` zum Datenanzeiger `<DPTR>` und lade das Ergebnis in den Programmzähler |
-| `JNB <bit>,<rel>` | Springe zu `<rel>`, wenn `<byte>` nicht gesetzt ist (=0) |
-| `JNC <rel>` | Springe zu `<rel>`, wenn das Übertragsbit nicht gesetzt ist (=0) |
-| `JNZ <rel>` | Springe zu `<rel>`, wenn der Akkumulator nicht Null ist |
-| `JZ <rel>` | Springe zu `<rel>`, wenn der Akkumulator Null ist |
-| `LCALL <addr16>` | Ruft bedingungslos Subroutine an der Adresse `<addr16>` auf |
-| `LJMP <addr16>` | Springt bedingungslos zur Adresse `<addr16>` |
-| `MOV <Zielbyte>,<Quellenbyte>` | Kopiere das `<Quellenbyte>` in das `<Zielbyte>` |
-| `MOV <Zielbit>,<Quellenbit>` | Kopiere das `<Quellenbit>` in das `<Zielbit>` |
-| `MOV <DPTR>,<data16>` | Lade die Konstante `<data16>` in den Datenzeiger `<DPTR>` |
-| `MUL <A>,<B>` | Multipliziere den Akkumulator `<A>` zum Register `<B>` |
-| `NOP` | Setze Programm mit folgendem Befehl fort |
-| `ORL <Zielbyte>,<Quellenbyte>` | Speichert eine bitweise logische ODER-Verknüpfung zwischen dem `<Zielbyte>` und dem `<Quellenbyte>` im `<Zielbyte>` |
-| `POP <byte>` | Bringe den Wert vom Stack Pointer zum Byte `<byte>` und dekrementiere den Stack Pointer |
-| `PUSH <byte>` | Kopiere den Wert vom Byte `<byte>` in den Stack Pointer und inkrementiere den Stack Pointer |
-| `RET` | Springt aus der Subroutine zurück |
-| `RETI` | Springe aus dem Interrupt zurück |
-| `RL <A>` | Schiebe die Bits des Akkumulators `<A>` nach links |
-| `RLC <A>` | Schiebe die Bits samt Übertragsbit des Akkumulators `<A>` nach links |
-| `RR <A>` | Schiebe die Bits des Akkumulators `<A>` nach rechts |
-| `RRC <A>` | Schiebe die Bits samt Übertragsbit des Akkumulators `<A>` nach rechts |
-| `SETB <bit>` | Setze das Bit `<bit>` |
-| `SJMP <rel>` | Springe unbedingt zu `<rel>` |
-| `SUBB <A>,<Operand>` | Subtrahiere den Operanten `<Operand>` vom Akkumulator `<A>` |
-| `SWAP <A>` | Vertausche Halbbytes im Akkumulator `<A>` |
-| `XCH <A>,<Byte>` | Vertausche das Byte `<Byte>` im Akkumulator `<A>` |
-| `XRL <Zielbyte>,<Quellenbyte>` | Speichert eine bitweise logische Exklusiv-ODER-Verknüpfung zwischen dem `<Zielbyte>` und dem `<Quellenbyte>` im `<Zielbyte>` |
++---------------------------------+---------------------------------------------------------------------------------------------+
+|              Befehl             |                                         Beschreibung                                        |
++=================================+=============================================================================================+
+| `ACALL <addr11>`                | Ruft die Subroutine an der Adresse `<addr11>` auf                                           |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `ADD <A>,<Operand>`             | Addiert den `<Operand>` zum Inhalt des Akkumulators `<A>` hinzu                             |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `ADDC <A>,<Operand>`            | Addiert den `<Operand>` und das Übertragsbit zum Inhalt des Akkumulators `<A>` hinzu        |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `AJMP <addr11>`                 | Springt zu Adresse `<addr11>`                                                               |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `ANL <Zielbyte>, <Quellenbyte>` | Speichert eine bitweise logische UND-Verknüpfung zwischen dem `<Zielbyte>` und dem          |
+|                                 | `<Quellenbyte>` im `<Zielbyte>`                                                             |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `CJNE <Operand1>,`              | Springe zu `<rel>` falls die Werte `<Operand1>` und `<Operand2>` ungleich sind              |
+| `<Operand2>,<rel>`              |                                                                                             |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `CLR <bit>/<A>`                 | Löscht das Bit `<bit>` bzw. den Akkumulator `<A>`                                           |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `CPL <bit>/<A>`                 | Komplementiert das Bit `<bit>` bzw. den Akkumulator `<A>`                                   |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `DA <A>`                        | Korrigiere den Dezimalwert des Akkumulators `<A>` nach einer Addition                       |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `DEC <byte>`                    | Dekrementiere `<byte>` um 1                                                                 |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `DIV <A>,<B>`                   | Dividiere Akkumulator `<A>` durch Register `<B>`                                            |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `DJNZ <byte>,<rel>`             | Dekrementiere `<byte>` um 1 und springe zu `<rel>` wenn das `<byte>` nicht Null ist         |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `INC <byte>/<DPTR>`             | Inkrementiere `<byte>` bzw. `<DPTR>` um 1                                                   |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `JB <bit>,<rel>`                | Springe zu `<rel>`, wenn `<byte>` gesetzt ist (=1)                                          |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `JBC <bit>,<rel>`               | Springe zu `<rel>`, wenn `<byte>` gesetzt ist (=1) und lösche dieses anschließend           |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `JC <rel>`                      | Springe zu `<rel>`, wenn das Übertragsbit gesetzt ist (=1)                                  |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `JMP <A>+<DPTR>`                | Addiere den Akkumulator `<A>` zum Datenanzeiger `<DPTR>` und lade das Ergebnis in den       |
+|                                 | Programmzähler                                                                              |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `JNB <bit>,<rel>`               | Springe zu `<rel>`, wenn `<byte>` nicht gesetzt ist (=0)                                    |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `JNC <rel>`                     | Springe zu `<rel>`, wenn das Übertragsbit nicht gesetzt ist (=0)                            |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `JNZ <rel>`                     | Springe zu `<rel>`, wenn der Akkumulator nicht Null ist                                     |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `JZ <rel>`                      | Springe zu `<rel>`, wenn der Akkumulator Null ist                                           |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `LCALL <addr16>`                | Ruft bedingungslos Subroutine an der Adresse `<addr16>` auf                                 |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `LJMP <addr16>`                 | Springt bedingungslos zur Adresse `<addr16>`                                                |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `MOV <Zielbyte>,`               | Kopiere das `<Quellenbyte>` in das `<Zielbyte>`                                             |
+| `<Quellenbyte>`                 |                                                                                             |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `MOV <Zielbit>,`                | Kopiere das `<Quellenbit>` in das `<Zielbit>`                                               |
+| `<Quellenbit>`                  |                                                                                             |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `MOV <DPTR>,<data16>`           | Lade die Konstante `<data16>` in den Datenzeiger `<DPTR>`                                   |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `MUL <A>,<B>`                   | Multipliziere den Akkumulator `<A>` zum Register `<B>`                                      |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `NOP`                           | Setze Programm mit folgendem Befehl fort                                                    |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `ORL <Zielbyte>,`               | Speichert eine bitweise logische ODER-Verknüpfung zwischen dem `<Zielbyte>` und dem         |
+| `<Quellenbyte>`                 | `<Quellenbyte>` im `<Zielbyte>`                                                             |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `POP <byte>`                    | Bringe den Wert vom Stack Pointer zum Byte `<byte>` und dekrementiere den Stack Pointer     |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `PUSH <byte>`                   | Kopiere den Wert vom Byte `<byte>` in den Stack Pointer und inkrementiere den Stack Pointer |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `RET`                           | Springt aus der Subroutine zurück                                                           |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `RETI`                          | Springe aus dem Interrupt zurück                                                            |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `RL <A>`                        | Schiebe die Bits des Akkumulators `<A>` nach links                                          |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `RLC <A>`                       | Schiebe die Bits samt Übertragsbit des Akkumulators `<A>` nach links                        |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `RR <A>`                        | Schiebe die Bits des Akkumulators `<A>` nach rechts                                         |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `RRC <A>`                       | Schiebe die Bits samt Übertragsbit des Akkumulators `<A>` nach rechts                       |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `SETB <bit>`                    | Setze das Bit `<bit>`                                                                       |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `SJMP <rel>`                    | Springe unbedingt zu `<rel>`                                                                |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `SUBB <A>,<Operand>`            | Subtrahiere den Operanten `<Operand>` vom Akkumulator `<A>`                                 |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `SWAP <A>`                      | Vertausche Halbbytes im Akkumulator `<A>`                                                   |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `XCH <A>,<Byte>`                | Vertausche das Byte `<Byte>` im Akkumulator `<A>`                                           |
++---------------------------------+---------------------------------------------------------------------------------------------+
+| `XRL <Zielbyte>,`               | Speichert eine bitweise logische Exklusiv-ODER-Verknüpfung zwischen dem `<Zielbyte>` und    |
+| `<Quellenbyte>`                 | dem `<Quellenbyte>` im `<Zielbyte>`                                                         |
++---------------------------------+---------------------------------------------------------------------------------------------+
 
 [^Befehlsatz]: (o.V.) (o.J.) alle Befehle der 8051-Mikrocontroller-Familie, http://www.self8051.de/alle\_Befehle\_des\_8051\_Mikrocontroller,13290.html, Einsichtnahme: 27.01.2015.
 
