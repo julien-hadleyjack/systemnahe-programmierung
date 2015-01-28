@@ -4,14 +4,7 @@ Zur Entwicklung wird die MCU 8051 IDE eingesetzt, welche für Windows und Linux 
 
 ![MCU 8051 IDE](images/mcu8051ide_screenshot.png "Übersicht der MCU 8051 IDE")
 
-\begin{wrapfigure}{r}{.4\textwidth}
-\vspace{-50pt}
-\hspace{10pt}
-\includegraphics[height=.55\textwidth]{images/ide-editor.png}
-\vspace{-50pt}
-\hspace{30pt}
-\caption[Code Editor der MCU 8051 IDE]{MCU 8051 IDE Editor}
-\end{wrapfigure}
+\inplacefig{.4}{images/ide-editor.png}
 Zentrales Element der IDE ist der Code Editor, welcher mit üblichen aber auch zusätzlichen Features aufwartet. Er bietet Funktionen wie Syntax Highlighting, Vervollständigung der Befehle während des Tippens, Überprüfung der Code Syntax und der Rechtschreibung in Kommentaren. Neben der Anzeige von Zeilennummern, Lesezeichen und Haltemarken ist es möglich den Code als XHTML oder LaTeX Dokument zu exportieren.
 
 Im unteren Bereich der IDE ist der Simulator untergebracht. Er virtualisiert einen gewählten Microcontroller und gibt dem Benutzer die Möglichkeit genau zu erkennen, wie sich die Kompenenten verhalten, nachdem z.B. der Wert des Registers verändert wird. So wird es möglich bestimmte Fehler im Programm zu finden, was mit reeler Hardware nahezu unmöglich wäre. Der Benutzer hat darüber hinaus die Möglichkeit jegliche Speicher zu editieren und das Verhalten direkt zu beobachten. Ein Abbild des laufenden Programms kann außerdem in einer Datei gespeichert werden und zu einem späteren Zeitpunkt fortgesetzt werden.
