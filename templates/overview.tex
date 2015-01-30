@@ -161,7 +161,18 @@
 \renewcommand{\thepage}{\arabic{page}}
 \setcounter{page}{1}
 #}
+\begin{acronym}[YTMMM]
+\setlength{\itemsep}{-\parsep}
 
+\acro{EPROM}{Erasable Programmable Read-Only Memory}
+\acro{I/O}{Input/Output}
+\acro{IDE}{Integrated Development Environment (Deutsch: Integrierte Entwicklungsumgebung)}
+\acro{LED}{Light-Emitting Diode}
+\acro{RAM}{Random-Access Memory}
+\acro{ROM}{Read-Only Memory}
+\acro{XML}{Extensible Markup Language}
+
+\end{acronym}
 %% Body start.
 {% for file in files -%}
 \include{chapters-latex/{{file}}}
@@ -192,6 +203,6 @@
 \include{special/acronyms}
 
 % Glossar
-\printglossary[style=altlist,title={{ snippets['glossar'] }}]
+%\printglossary[style=altlist,title={{ snippets['glossar'] }}]
 
 \end{document}
