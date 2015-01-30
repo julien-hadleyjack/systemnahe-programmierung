@@ -99,6 +99,6 @@
 | `<Quellenbyte>`                 | dem `<Quellenbyte>` im `<Zielbyte>`                                                         |
 +---------------------------------+---------------------------------------------------------------------------------------------+
 
-[^Befehlsatz]: (o.V.) (o.J.) alle Befehle der 8051-Mikrocontroller-Familie, http://www.self8051.de/alle\_Befehle\_des\_8051\_Mikrocontroller,13290.html, Einsichtnahme: 27.01.2015.
+[^Befehlsatz]: (o.V.) (o.J.) alle Befehle der 8051-Mikrocontroller-Familie,\\http://www.self8051.de/alle\_Befehle\_des\_8051\_Mikrocontroller,13290.html, Einsichtnahme: 27.01.2015.
 
 
