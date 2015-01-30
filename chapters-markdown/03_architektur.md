@@ -1,6 +1,8 @@
-
 # Mikrocontroller-Architektur #
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.   
+Bei der Intel 8051 Familie handelt es sich um einen 8-Bit Prozessorkern mit einem einheitlichen Befehlssatz. Es werden 128 Byte \ac{RAM} und 4096 Byte \ac{ROM} intern verbaut, wobei die Möglichkeit zum Anschluss von externem \ac{RAM} und \ac{ROM} besteht. Außerdem besitzt er 2 Timer und 4 8-bit \ac{I/O} Ports. Sie besitzt 2 externe Interrupt Quellen sowie 2 verschiedene Interrupt Prioritäten.
+Es handelt sich hierbei um eine Harvard-Architektur. 
 
-Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet,
+\ac{RAM} Random-Access Memory
+\ac{ROM} Read-Only Memory
+\ac{I/O} Input/Output
