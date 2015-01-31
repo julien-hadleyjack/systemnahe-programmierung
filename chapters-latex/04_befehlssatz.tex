@@ -1,0 +1,331 @@
+%!TEX root = ../systemnahe-programmierung.tex
+
+\chapter{Befehlssatz}\label{befehlssatz}
+
+Dies ist ein Ausszug aus dem Befehlssatz\footnote{(o.V.) (o.J.) alle
+  Befehle der 8051-Mikrocontroller-Familie,
+  http://www.self8051.de/alle-Befehle-des-8051-Mikrocontroller,13290.html,
+  Einsichtnahme: 27.01.2015.}.
+
+\begin{longtable}[c]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.25\columnwidth}\raggedright\strut
+\textbf{Befehl}
+\strut\end{minipage} &
+\begin{minipage}[b]{0.69\columnwidth}\raggedright\strut
+\textbf{Beschreibung}
+\strut\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{ACALL\ \textless{}addr11\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Ruft die Subroutine an der Adresse
+\texttt{\textless{}addr11\textgreater{}} auf
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{ADD\ \textless{}A\textgreater{},\textless{}Operand\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Addiert den \texttt{\textless{}Operand\textgreater{}} zum Inhalt des
+Akkumulators \texttt{\textless{}A\textgreater{}} hinzu
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{ADDC\ \textless{}A\textgreater{},\textless{}Operand\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Addiert den \texttt{\textless{}Operand\textgreater{}} und das
+Übertragsbit zum Inhalt des Akkumulators
+\texttt{\textless{}A\textgreater{}} hinzu
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{AJMP\ \textless{}addr11\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springt zu Adresse \texttt{\textless{}addr11\textgreater{}}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{ANL\ \textless{}Zielbyte\textgreater{},\ \textless{}Quellenbyte\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Speichert eine bitweise logische UND-Verknüpfung zwischen dem
+\texttt{\textless{}Zielbyte\textgreater{}} und dem
+\texttt{\textless{}Quellenbyte\textgreater{}} im
+\texttt{\textless{}Zielbyte\textgreater{}}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{CJNE\ \textless{}Operand1\textgreater{},}
+\texttt{\textless{}Operand2\textgreater{},\textless{}rel\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springe zu \texttt{\textless{}rel\textgreater{}} falls die Werte
+\texttt{\textless{}Operand1\textgreater{}} und
+\texttt{\textless{}Operand2\textgreater{}} ungleich sind
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{CLR\ \textless{}bit\textgreater{}/\textless{}A\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Löscht das Bit \texttt{\textless{}bit\textgreater{}} bzw. den
+Akkumulator \texttt{\textless{}A\textgreater{}}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{CPL\ \textless{}bit\textgreater{}/\textless{}A\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Komplementiert das Bit \texttt{\textless{}bit\textgreater{}} bzw. den
+Akkumulator \texttt{\textless{}A\textgreater{}}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{DA\ \textless{}A\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Korrigiere den Dezimalwert des Akkumulators
+\texttt{\textless{}A\textgreater{}} nach einer Addition
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{DEC\ \textless{}byte\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Dekrementiere \texttt{\textless{}byte\textgreater{}} um 1
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{DIV\ \textless{}A\textgreater{},\textless{}B\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Dividiere Akkumulator \texttt{\textless{}A\textgreater{}} durch Register
+\texttt{\textless{}B\textgreater{}}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{DJNZ\ \textless{}byte\textgreater{},\textless{}rel\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Dekrementiere \texttt{\textless{}byte\textgreater{}} um 1 und springe zu
+\texttt{\textless{}rel\textgreater{}} wenn das
+\texttt{\textless{}byte\textgreater{}} nicht Null ist
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{INC\ \textless{}byte\textgreater{}/\textless{}DPTR\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Inkrementiere \texttt{\textless{}byte\textgreater{}} bzw.
+\texttt{\textless{}DPTR\textgreater{}} um 1
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{JB\ \textless{}bit\textgreater{},\textless{}rel\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springe zu \texttt{\textless{}rel\textgreater{}}, wenn
+\texttt{\textless{}byte\textgreater{}} gesetzt ist (=1)
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{JBC\ \textless{}bit\textgreater{},\textless{}rel\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springe zu \texttt{\textless{}rel\textgreater{}}, wenn
+\texttt{\textless{}byte\textgreater{}} gesetzt ist (=1) und lösche
+dieses anschließend
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{JC\ \textless{}rel\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springe zu \texttt{\textless{}rel\textgreater{}}, wenn das Übertragsbit
+gesetzt ist (=1)
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{JMP\ \textless{}A\textgreater{}+\textless{}DPTR\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Addiere den Akkumulator \texttt{\textless{}A\textgreater{}} zum
+Datenanzeiger \texttt{\textless{}DPTR\textgreater{}} und lade das
+Ergebnis in den Programmzähler
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{JNB\ \textless{}bit\textgreater{},\textless{}rel\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springe zu \texttt{\textless{}rel\textgreater{}}, wenn
+\texttt{\textless{}byte\textgreater{}} nicht gesetzt ist (=0)
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{JNC\ \textless{}rel\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springe zu \texttt{\textless{}rel\textgreater{}}, wenn das Übertragsbit
+nicht gesetzt ist (=0)
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{JNZ\ \textless{}rel\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springe zu \texttt{\textless{}rel\textgreater{}}, wenn der Akkumulator
+nicht Null ist
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{JZ\ \textless{}rel\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springe zu \texttt{\textless{}rel\textgreater{}}, wenn der Akkumulator
+Null ist
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{LCALL\ \textless{}addr16\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Ruft bedingungslos Subroutine an der Adresse
+\texttt{\textless{}addr16\textgreater{}} auf
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{LJMP\ \textless{}addr16\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springt bedingungslos zur Adresse
+\texttt{\textless{}addr16\textgreater{}}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{MOV\ \textless{}Zielbyte\textgreater{},}
+\texttt{\textless{}Quellenbyte\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Kopiere das \texttt{\textless{}Quellenbyte\textgreater{}} in das
+\texttt{\textless{}Zielbyte\textgreater{}}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{MOV\ \textless{}Zielbit\textgreater{},}
+\texttt{\textless{}Quellenbit\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Kopiere das \texttt{\textless{}Quellenbit\textgreater{}} in das
+\texttt{\textless{}Zielbit\textgreater{}}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{MOV\ \textless{}DPTR\textgreater{},\textless{}data16\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Lade die Konstante \texttt{\textless{}data16\textgreater{}} in den
+Datenzeiger \texttt{\textless{}DPTR\textgreater{}}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{MUL\ \textless{}A\textgreater{},\textless{}B\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Multipliziere den Akkumulator \texttt{\textless{}A\textgreater{}} zum
+Register \texttt{\textless{}B\textgreater{}}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{NOP}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Setze Programm mit folgendem Befehl fort
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{ORL\ \textless{}Zielbyte\textgreater{},}
+\texttt{\textless{}Quellenbyte\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Speichert eine bitweise logische ODER-Verknüpfung zwischen dem
+\texttt{\textless{}Zielbyte\textgreater{}} und dem
+\texttt{\textless{}Quellenbyte\textgreater{}} im
+\texttt{\textless{}Zielbyte\textgreater{}}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{POP\ \textless{}byte\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Bringe den Wert vom Stack Pointer zum Byte
+\texttt{\textless{}byte\textgreater{}} und dekrementiere den Stack
+Pointer
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{PUSH\ \textless{}byte\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Kopiere den Wert vom Byte \texttt{\textless{}byte\textgreater{}} in den
+Stack Pointer und inkrementiere den Stack Pointer
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{RET}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springt aus der Subroutine zurück
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{RETI}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springe aus dem Interrupt zurück
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{RL\ \textless{}A\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Schiebe die Bits des Akkumulators \texttt{\textless{}A\textgreater{}}
+nach links
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{RLC\ \textless{}A\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Schiebe die Bits samt Übertragsbit des Akkumulators
+\texttt{\textless{}A\textgreater{}} nach links
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{RR\ \textless{}A\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Schiebe die Bits des Akkumulators \texttt{\textless{}A\textgreater{}}
+nach rechts
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{RRC\ \textless{}A\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Schiebe die Bits samt Übertragsbit des Akkumulators
+\texttt{\textless{}A\textgreater{}} nach rechts
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{SETB\ \textless{}bit\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Setze das Bit \texttt{\textless{}bit\textgreater{}}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{SJMP\ \textless{}rel\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springe unbedingt zu \texttt{\textless{}rel\textgreater{}}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{SUBB\ \textless{}A\textgreater{},\textless{}Operand\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Subtrahiere den Operanten \texttt{\textless{}Operand\textgreater{}} vom
+Akkumulator \texttt{\textless{}A\textgreater{}}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{SWAP\ \textless{}A\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Vertausche Halbbytes im Akkumulator \texttt{\textless{}A\textgreater{}}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{XCH\ \textless{}A\textgreater{},\textless{}Byte\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Vertausche das Byte \texttt{\textless{}Byte\textgreater{}} im
+Akkumulator \texttt{\textless{}A\textgreater{}}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\texttt{XRL\ \textless{}Zielbyte\textgreater{},}
+\texttt{\textless{}Quellenbyte\textgreater{}}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Speichert eine bitweise logische Exklusiv-ODER-Verknüpfung zwischen dem
+\texttt{\textless{}Zielbyte\textgreater{}} und dem
+\texttt{\textless{}Quellenbyte\textgreater{}} im
+\texttt{\textless{}Zielbyte\textgreater{}}
+\strut\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
