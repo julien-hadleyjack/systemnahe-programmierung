@@ -54,7 +54,7 @@
 \newcommand{\stdfig}[3]{
     \begin{figure}
     \centering
-    \includegraphics[width = #1]{img/#2.eps}
+    \includegraphics[width = #1]{#2}
     \caption{#3}
     \label{fig:#2}
     \end{figure}
@@ -69,7 +69,7 @@
 \newcommand{\inplacefig}[2]{
     \begin{figure}[H]
     \centering
-    \includegraphics[width = #1]{img/#2.eps}
+    \includegraphics[width = #1]{#2}
     \label{fig:#2}
     \end{figure}
 }
@@ -97,7 +97,23 @@
 
 
 %\maketitle
-\include{templates/dhbw-titlepage}
+\begin{titlepage}
+	\begin{longtable}{p{.4\textwidth} p{.4\textwidth}}
+	  {\includegraphics[height=2.6cm]{images/1und1-logo}} & 
+	  {\includegraphics[height=2.6cm]{images/dhbw.png}}
+	\end{longtable}
+	\enlargethispage{20mm}
+	\begin{center}
+	  \vspace*{12mm}	{\LARGE\bf Systemnahe Programmierung}\\
+	  \vspace*{12mm}	des Studienganges Angewandte Informatik\\
+	  \vspace*{3mm} 	an der Dualen Hochschule Baden-Württemberg Karlsruhe\\
+	  \vspace*{12mm}	{\large\bf bei Prof. Dr. Ralph Lausen}\\
+	  \vspace*{12mm}	von\\
+	  \vspace*{3mm} 	{\large\bf Julien Hadley-Jack\\Sebastian Dernbach}\\
+	  \vspace*{12mm}	Januar 2015\\
+	\end{center}
+	\vfill
+\end{titlepage}
 
 \newpage
 
@@ -147,6 +163,6 @@
 \include{special/acronyms}
 
 % Glossar
-\printglossary[style=altlist,title=Glossar]
+%\printglossary[style=altlist,title=Glossar]
 
 \end{document}
