@@ -3,7 +3,7 @@
 
 ![Konfiguration des Nummernfeldes](images/keypad-screenshot)
 
-Als erstes muss die Matrix-Keypad der IDE richtig konfiguriert werden. Im Bild kann man sehen, dass es auf Port 1 erreichbar ist. Die Einstellungen können auch importiert werden:
+Für die Simulation des Nummernfeldes wird das *Matrix Keypad* der *MCU 8051 IDE* verwendet. Als Erstes muss die Pin-Belegung konfiguriert werden. Im Bild kann man sehen, dass das Nummerfeld auf Port 1 erreichbar ist. Diese Einstellung kann auch in die IDE import werden (siehe Anhang).
 <!--
 ````
 # MCU 8051 IDE: Virtual HW component configuration file
@@ -15,20 +15,21 @@ MatrixKeyPad {{4 1 0 1 5 1 1 1 6 1 2 1 7 - 3 -} {4 4 0 7 5 3 1 6 6 2 2 5 7 - 3 -
 -->
 
 ````nasm
-keypad  equ P1              ;Matrix keypad
-col1    equ keypad.3            ;Column 1
-col2    equ keypad.4            ;Column 2
-col3    equ keypad.5            ;Column 3
+keypad      equ P1              ;Matrix keypad
+col1        equ keypad.3        ;Column 1
+col2        equ keypad.4        ;Column 2
+col3        equ keypad.5        ;Column 3
 
-value   equ 30H             ;Value of pressed button
-pressed bit 00H             ;Was the button just pressed?
-secure_mode bit 01h         ;Is the user logiged in?
+value       equ 30H             ;Value of pressed button
+pressed     bit 00H             ;Was the button just pressed?
+secure_mode bit 01h             ;Is the user logiged in?
 ````
 
-Zusätzlich werden auch noch drei Variablen definiert:
-* **Value**: Wert der gedrückten Taste
-* **pressed**: Ob schon eine Taste gedrückt wurde (wird zurückgesetzt, wenn auf ein neuen Tastendruck gewartet wird)
-* **secure_mode**: In welchem Zustand die Alarmsicherung ist (0 für ausgeschaltet, 1 für angeschaltet)
+Zusätzlich zu den Bits für das Nummernfeld werden auch noch drei Variablen definiert:
+
+- `value`: Wert der gedrückten Taste
+- `pressed`: Ob schon eine Taste gedrückt wurde (wird zurückgesetzt, wenn auf ein neuen Tastendruck gewartet wird)
+- `secure_mode`: In welchem Zustand die Alarmsicherung ist (0 für ausgeschaltet, 1 für eingeschaltet)
 
 
 ````nasm
@@ -36,11 +37,11 @@ get_button:
     clr pressed
 
     ;Check first row
-    mov value,#1            ;Start value is first number on row
+    mov value,#1                ;Start value is first number on row
     mov keypad, #11111110B      ;Mark first row
-    acall check_col1        ;Check all columns 
+    acall check_col1            ;Check all columns 
 
-    ; If button was pressed in row, jump out of function
+    ;If button was pressed in row, jump out of function
     jb pressed, found_button    
  
     mov value,#4
@@ -73,7 +74,7 @@ check_col1:
     ret
 ````
 
-Wenn in der ersten Spalte kein Tastendruck entdeckt worden ist, wird zu `check_col2` gesprungen, die die nächste Spalte überprüft. Sollte die Taste aber gedrückt sein, dass muss auf das Ende des Tastendruckes gewartet werden. Dafür wird einfach zur Zeile der Überprüfung gesprungen.
+Wenn in der ersten Spalte kein Tastendruck entdeckt worden ist, wird zu `check_col2` gesprungen, die die nächste Spalte überprüft. Sollte die Taste aber gedrückt sein, dass muss erst auf das Ende des Tastendrucks gewartet werden. Dafür wird einfach zur gleichen Zeile der Überprüfung gesprungen. Dach wird noch das Bit für `pressed` auf `1` gesetzt.
 
 ````nasm
 check_col2:
@@ -84,7 +85,7 @@ check_col2:
     ret
 ````
 
-In der nächsten Spalte wird ähnlich vorgangen. Der Unterstied ist, dass wenn ein Tastendruck entdeckt wurde, `value` um den Unterschied der Tastenwerte inkrementiert wird (in diesem Fall 1).
+Die Überprüfung der nächsten Spalten funktioniert fast identisch. Der einzige Unterschied findet bei einem erfolgreichem Tastendruck statt. Da der Wert der Taste verschiedene Werte hat, muss der Inhalt von `value` noch angepasst werden. Dafür wird einfach um den Unterschied inkrementiert (in diesem Fall 1).
 
 ````nasm
 check_pin:
@@ -113,3 +114,4 @@ check_pin:
 ````
 
 Die Hauptfunktion ist `check_pin`. Sie ruft viermal die `get_button`-Funktion auf und überprüft, ob der gelieferte Tastendruck dem gewünschtem gleicht. Sollte dies einmal nicht der Fall sein, dann wird die Suche von vorne angefangen. Aber wurde die Ziffernfolge erfolgreich eingegeben, dann wird der Alarm-Modus gewechselt.
+Die Zifferfolge lässt sich sehr leicht ändern, unter anderem auch in der Länge.

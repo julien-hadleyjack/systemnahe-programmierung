@@ -1,6 +1,6 @@
 
 # Befehlssatz #
-[^Befehlsatz]
+Dies ist ein Ausszug aus dem Befehlssatz[^Befehlsatz].
 
 +---------------------------------+---------------------------------------------------------------------------------------------+
 |            **Befehl**           |                                       **Beschreibung**                                      |
