@@ -6,6 +6,8 @@ In dem vorliegendem Projekt haben wir uns für die Implemntierung einer Alarmsic
 
 # Resultat
 
+![Deckblatt](screenshot_deckblatt.png)
+
 Das Endprodukt kann [hier](https://github.com/julien-hadleyjack/systemnahe-programmierung/releases/download/final/systemnahe-programmierung.pdf) heruntergeladen werden.
 
 # Bauen
