@@ -4,34 +4,55 @@
 
 % http://www.ctan.org/pkg/scrreprt
 \documentclass[
-    pagesize=pdftex,    % Page size is set with \pdfpagewidth and \pdfpageheight
-    twoside=false,      % Einseitiger Druck.
-    fontsize=12pt,      % Schriftgroesse
-    parskip=half,       % Halbe Zeile Abstand zwischen Absätzen.
-    headsepline,        % Linie nach Kopfzeile.
-    footsepline,        % Linie vor Fusszeile.
-    abstract=false,     % Abstract Überschriften
-    listof=totoc,       % show table of figures in toc but unnumbered
-    toc=bibliography,   % show bibliography in toc but unnumbered
+    pagesize=pdftex,          % Page size is set with \pdfpagewidth and \pdfpageheight
+    twoside=false,            % Einseitiger Druck.
+    fontsize={{ font_size }}, % Schriftgroesse
+    parskip=half,             % Halbe Zeile Abstand zwischen Absätzen.
+    headsepline,              % Linie nach Kopfzeile.
+    footsepline,              % Linie vor Fusszeile.
+    abstract=false,           % Abstract Überschriften
+    listof=totoc,             % show table of figures in toc but unnumbered
+    toc=bibliography          % show bibliography in toc but unnumbered
 ]{scrreprt}
 
+\setcapindent{0pt}
+%\setcapindent{1em}
+
 \usepackage{special-generated/customsettings}
+
+{% if citations_found %}
+{% for file in bib_files %}
+\addbibresource{ {{ file }} }
+{% endfor %}
+{% endif %}
+
+\usepackage{scrhack}
+
+{% if code_block_found %}
+\renewcommand{\listingscaption}{ {{ snippets['code'] }} }
+\renewcommand{\listoflistingscaption}{ {{ snippets['codelistings'] }} }
+{% endif %}
+
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
 
 \title{ {{ title }} }
 \author{ {{ author }} }
 \date{ {{ date }} }
 
+\usepackage{tikz}
+\usepackage{aeguill}
+
+
 % Support for hypertext links
 % http://www.ctan.org/pkg/hyperref
 \usepackage[%
-    pdftitle={ {{ title }} },                % text for PDF Title field 
-    pdfauthor={ {{ author }} },              % text for PDF Author field 
-    pdfsubject={ {{ title }} },              % text for PDF Subject field 
+    pdfusetitle,              % text for PDF Subject field 
     pdfcreator={pdflatex, LaTeX with KOMA-Script},   % text for PDF Creator field 
     pdfpagemode=UseOutlines,        % show bookmarks
-    {%- if snippets["language"] == "german" %}
+    {%- if language == "german" %}
     pdflang={de},                   % language identifier (RFC 3066)
-    {%- elif snippets["language"] == "english" %}
+    {%- elif language == "english" %}
     pdflang={en},                   % language identifier (RFC 3066)
     {%- endif %}
     hidelinks,                      % hide links (no color, no border)
@@ -48,14 +69,13 @@
 
 % Don't output references in case they're empty
 % http://tex.stackexchange.com/questions/74476/how-to-avoid-empty-thebibliography-environment-bibtex-if-there-are-no-refere
-{#
 {% raw %}
 \let\myBib\thebibliography
 \let\endmyBib\endthebibliography
 
 \renewcommand\thebibliography[1]{\ifx\relax#1\relax\else\myBib{#1}\fi}
 {% endraw %}
-#}
+
 
 
 % Stdfig -> Used as \stdfig{width}{label_name}{caption}
@@ -65,7 +85,7 @@
 \newcommand{\stdfig}[3]{
     \begin{figure}
     \centering
-    \includegraphics[width = #1]{#2}
+    \includegraphics[width = #1]{img/#2.eps}
     \caption{#3}
     \label{fig:#2}
     \end{figure}
@@ -80,122 +100,81 @@
 \newcommand{\inplacefig}[2]{
     \begin{figure}[H]
     \centering
-    \includegraphics[width = #1]{#2}
+    \includegraphics[width = #1]{img/#2.eps}
     \label{fig:#2}
     \end{figure}
 }
 {% endraw %}
 
-%\makeglossaries
-%\input{special/glossary}
+{% if glossaries_found %}
+\input{special/glossary}
+\makeglossaries
+{% endif %}
 
 \begin{document}
 
-{% if snippets["language"] == "german" %}
+{% if language == "german" %}
 \selectlanguage{ngerman}
-{% elif snippets["language"] == "english" %}
+{% elif language == "english" %}
 \selectlanguage{english}
 {% endif %}
 
+\title{Systemnahe Programmierung}
 
-%% Front page.
-\title{ {{ title }} }
 
-{% if date and date != "\\today" %}
-\renewcommand{\today}{ {{ date }} }
-{% elif not date %}
-\date{}
-{% endif %}
 
-{% if authors -%}
-    \author{
-        {% for author in authors -%}
-            {{ author }} \\
-        {% endfor -%}
-    }
-{% endif %}
+\author{
+        Julien Hadley Jack \\
+        Sebastian Dernbach \\
+       }
+
 
 %\maketitle
 \begin{titlepage}
-	\begin{longtable}{p{.4\textwidth} p{.4\textwidth}}
-	  {\includegraphics[height=2.6cm]{images/1und1-logo}} & 
-	  {\includegraphics[height=2.6cm]{images/dhbw.png}}
-	\end{longtable}
-	\enlargethispage{20mm}
-	\begin{center}
-	  \vspace*{12mm}	{\LARGE\bf Systemnahe Programmierung }\\
+    \begin{longtable}{p{.4\textwidth} p{.4\textwidth}}
+      {\includegraphics[height=2.6cm]{images/1und1-logo}} & 
+      {\includegraphics[height=2.6cm]{images/dhbw.png}}
+    \end{longtable}
+    \enlargethispage{20mm}
+    \begin{center}
+      \vspace*{12mm}    {\LARGE\bf Systemnahe Programmierung}\\
       \vspace*{12mm}    Vorlesung des\\
-	  \vspace*{3mm}	Studienganges Angewandte Informatik\\
-	  \vspace*{3mm} 	an der Dualen Hochschule Baden-Württemberg Karlsruhe\\
-	  \vspace*{12mm}	{\large\bf bei Prof. Dr. Ralph Lausen}\\
-	  \vspace*{12mm}	von\\
-	  \vspace*{3mm} 	{\large\bf Julien Hadley-Jack} (4739854)\\{\large\bf Sebastian Dernbach} (9586963)\\
-	  \vspace*{12mm}	Januar 2015\\
-	\end{center}
-	\vfill
+      \vspace*{3mm} Studienganges Angewandte Informatik\\
+      \vspace*{3mm}     an der Dualen Hochschule Baden-Württemberg Karlsruhe\\
+      \vspace*{12mm}    {\large\bf bei Prof. Dr. Ralph Lausen}\\
+      \vspace*{12mm}    von\\
+      \vspace*{3mm}     {\large\bf Julien Hadley-Jack}\\{\large\bf Sebastian Dernbach}\\
+      \vspace*{12mm}    Januar 2015\\
+    \end{center}
+    \vfill
 \end{titlepage}
 
 \newpage
 
-{#
-\renewcommand{\thepage}{\roman{page}}
-\setcounter{page}{1}
-
-% Sperrvermerk
-\include{special-generated/sperrvermerk}
-
-% Erklärung
-\include{special-generated/erklaerung}
-
-% Abstract
-\include{special/abstract}
-#}
+\pagestyle{plain}
 
 % Inhaltsverzeichnis
-\pagestyle{plain}
 %für die Anzeige von Unterkapiteln im Inhaltsverzeichnis: 2
 \setcounter{tocdepth}{ {{ toc_depth }} }
 \tableofcontents
 \newpage
 
-{#
-\renewcommand{\thepage}{\arabic{page}}
-\setcounter{page}{1}
-#}
+\pagenumbering{arabic}
 
 %% Body start.
-{% for file in files -%}
-\include{chapters-latex/{{file}}}
+{% for chapter in chapter_files -%}
+\include{chapters-latex/{{ chapter }} }
 {% endfor %}
 
 % Anhang
 \clearpage
-{#
-\pagenumbering{Roman}
 
-% Abbildungsverzeichnis
-\cleardoublepage
-\listoffigures
-
-%Tabellenverzeichnis
-%\cleardoublepage
-%\listoftables
-
-% Quellcodeverzeichnis
-% \cleardoublepage
-% \lstlistoflistings
-
-% Literaturverzeichnis
-\cleardoublepage
-\printbibliography
-
-#}
 
 % Abkürzungsverzeichnis
 \cleardoublepage
 \include{special/acronyms}
 
 % Glossar
-%\printglossary[style=altlist,title={{ snippets['glossar'] }}]
+%\printglossary[style=altlist,title=Glossar]
 
 \end{document}

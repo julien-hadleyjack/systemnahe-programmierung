@@ -1,14 +1,15 @@
 # -- coding: utf-8 --
-# { %raw% }
+#/usr/bin/env python3
 """
 Usage:
-    apply_template.py transform -i <input_dir>
-    apply_template.py template -i <input_dir> (-t <template_file> <output_file>)...
+    apply_template.py transform -o <output_dir>
+    apply_template.py template -i <input_dir> -o <output_dir> (-t <template_file> <output_file>)...
 
 Options:
-    -i <input_dir> The directory with the latex files
-    -t <template_file> <output_file>      transform the jinja2 template file and saves the output as the output_file
-    -h, --help      Show this screen and exit.
+    -i <input_dir>                      The directory with the markdown files
+    -o <output_dir>                     The directory with the latex files
+    -t <template_file> <output_file>    Transform the jinja2 template file and saves the output as the output_file
+    -h, --help                          Show this screen and exit.
 """
 import re
 
@@ -16,6 +17,7 @@ from jinja2 import Environment, FileSystemLoader
 from docopt import docopt
 import os
 import sys
+import textwrap
 
 # Add parent directory to the path.
 PARENT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
@@ -27,30 +29,34 @@ SPACE_BEFORE_LAST_BRACKET_REG = re.compile(r"({[\d\D]*? })")
 SPACE_AROUND_BRACKETS_REG = re.compile(r"({ [\d\D]*? })")
 
 
-def generate_metadata(input_dir):
+def generate_metadata(input_dir, output_dir):
     body = ""
-    for file in os.listdir(input_dir):
+    for file in os.listdir(output_dir):
         if file.endswith(".tex"):
-            with open(os.path.join(input_dir, file), "r", encoding="utf-8") as tex_file:
+            with open(os.path.join(output_dir, file), "r", encoding="utf-8") as tex_file:
                 body += tex_file.read()
 
     return {
-        "files": sorted(file[:-4] for file in os.listdir(input_dir) if file.endswith(".tex")),
-        "citations_found": r"\cite{" in body,
-        "code_blocks_found": r"\begin{minted}" in body,
+        "chapter_files": sorted(file[:-3] for file in os.listdir(input_dir) if file.endswith(".md") and file[0].isdigit()),
+        "appendix_files": sorted(file[:-3] for file in os.listdir(input_dir) if file.endswith(".md") and file[0].isalpha()),
+        "citations_found": "\\cite{" in body or "\\autocite{" in body,
+        "code_block_found": "\\begin{minted}" in body,
+        "code_found": "\\begin{minted}" in body or "\\mintinline" in body,
+        "glossaries_found": "\\gls{" in body or "\\glspl{" in body or "\\glspl{" in body,
+        "table_found": "\\begin{longtable}" in body,
         "page_layout": "top={0}, bottom={1}, left={2}, right={3}".format(top_margin, bot_margin, left_margin, right_margin)
-
     }
 
 
-def process_chapter_files(input_dir):
-    for file in os.listdir(input_dir):
+def process_chapter_files(output_dir):
+    for file in os.listdir(output_dir):
         if file.endswith(".tex"):
             content = ""
-            with open(os.path.join(input_dir, file), "r", encoding="utf-8") as tex_file:
-                #content = apply_minted(tex_file.read())
-                content = apply_minted(tex_file.read())
-            with open(os.path.join(input_dir, file), "w", encoding="utf-8") as tex_file:
+            with open(os.path.join(output_dir, file), "r", encoding="utf-8") as tex_file:
+                content = tex_file.read()
+                content = apply_minted(content)
+                #content = apply_longtable_caption(content)
+            with open(os.path.join(output_dir, file), "w", encoding="utf-8") as tex_file:
                 tex_file.write(content)
 
 def process_tex_file(metadata, template_name):
@@ -62,21 +68,74 @@ def process_tex_file(metadata, template_name):
 
 
 def apply_minted(body):
-    verbatim_regex = re.compile(r"(?s)(\\begin{verbatim}.*?\\end{verbatim})")
+    verbatim_regex = re.compile(r"(?s)(\\begin\{lstlisting\}\[)(.*?)(\])(.*?)(\\end\{lstlisting\})")
 
-    # Finds the language and the code separatedly from a verbatim block.
-    # More specifically: looks for '#!language\ncode' inside a verbatim block.
-    language_hashtag_regex = re.compile(r"\\begin{verbatim}\n\#\!([\d\D]*?)\n([\d\D]*)\\end{verbatim}")
+    for start, original_options, sep, content, end in verbatim_regex.findall(body):
+        language_value = None
+        caption_value = None
 
-    search = verbatim_regex.findall(body)
-    if search:
-        for verbatim in search:
-            code_search = language_hashtag_regex.findall(verbatim)
-            if code_search:
-                lang, code = code_search[0]
-                latex_code = "\\begin{{minted}}{{lang}}\n{code}\\end{{minted}}".format(code=code)
-                latex_code = latex_code.replace("{lang}", "{" + lang + "}")
-                body = body.replace(verbatim, latex_code)
+        options_split = original_options.split(", ")
+        temp_option_split = []
+        for option in options_split:
+            if option.startswith("language"):
+                language_value = option.split("=")[1]
+                continue
+
+            if option.startswith("caption"):
+                caption_value = option.split("=")[1]
+                continue
+
+            temp_option_split.append(option)
+
+        options_split = temp_option_split
+
+        old_listing = "".join([start, original_options, sep, content, end])
+        new_options = "[{}]".format(", ".join(options_split)) if options_split else ""
+        minted_simple = """
+        \\begin{{minted}}{options}{{{lang}}}
+        {code}
+        \\end{{minted}}
+        """
+        minted_output = textwrap.dedent(minted_simple).format(options=new_options, lang=language_value, code=content)
+
+        if caption_value:
+            minted_captioned = """
+            \\begin{{listing}}[H]
+            {minted}
+            \\vspace{{-5pt}}
+            \\caption{caption_short}{{{caption_text}}}
+            \\end{{listing}}
+            """
+            caption_split = caption_value.split("\\autocite")
+            if len(caption_split) == 2:
+                caption_short = "[{}]".format(caption_split[0].strip())
+            else:
+                caption_short = ""
+            minted_output = textwrap.dedent(minted_captioned).format(minted=minted_output, caption_text=caption_value, caption_short=caption_short)
+
+        body = body.replace(old_listing, minted_output)
+
+    inline_code_regex = re.compile(r"(\\lstinline!)(.*?)(!)")
+
+    for start, content, end in inline_code_regex.findall(body):
+        old_inline = "".join([start, content, end])
+        new_inline = "\\mintinline{{text}}{{{content}}}".format(content=content)
+        body = body.replace(old_inline, new_inline)
+
+    return body
+
+def apply_longtable_caption(body):
+    verbatim_regex = re.compile(r"(?s)(?:\\begin\{longtable\}.*?\n)(\\caption\{)(.*?\})(\\tabularnewline)(.*?)(\\bottomrule)")
+
+    for elements in verbatim_regex.findall(body):
+        caption, caption_text, newline, content, bottomrule = elements
+
+        caption_short = caption_text.split("\\autocite")
+        if len(caption_short) == 2:
+            caption = "\\caption[{}]{{".format(caption_short[0].strip())
+
+        reordered_longtable = content, bottomrule, "\n", caption, caption_text, newline
+        body = body.replace("".join(elements),"".join(reordered_longtable))
 
     return body
 
@@ -105,10 +164,10 @@ if __name__ == "__main__":
     arguments = docopt(__doc__)
 
     if arguments["transform"]:
-        process_chapter_files(arguments["-i"])
+        process_chapter_files(arguments["-o"])
     
     if arguments["template"]:
-        metadata = generate_metadata(arguments["-i"])
+        metadata = generate_metadata(arguments["-i"], arguments["-o"])
 
         for template, output in zip(arguments["-t"], arguments["<output_file>"]):            
 
@@ -116,6 +175,3 @@ if __name__ == "__main__":
 
             with open(output, "w", encoding="utf-8") as output_file:
                 output_file.write(processed_tex_file)
-
-
-# { %endraw% }

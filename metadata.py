@@ -1,46 +1,78 @@
 # coding=utf-8
 
-# Global settings.
-document_class = "ext" + "article"  # Ext is for extsizes package.
+###############################################################################
+# 
+#    General Options, Layout
+#
+###############################################################################
+
 font_size = "12pt"  # Allowed: 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, 20pt
-language = "de" # options: de, en
+language = "german" # options: german, english
 font_type = "palatino" # options: palatino, goudysans, lmodern, libertine
-bib_files = ["references.bib"]
-
-
-"""
-Packages. Examples:
-rotating (Paket um Textteile drehen zu können)
-lscape (Paket um Seite im Querformat anzuzeigen)
-amsmath, amssymb (Mathematikpakete benutzen)
-"""
-custom_packages = []
-
-
 toc_depth = 2
 
-
-# Bibliography.
-bibliography_style = "ieeetr"  # Set to 'ieeetr' for ordered bibliography.
-put_bibliography_on_new_page = True
-
-
 # Layout, as strings with specified metric unit.
-top_margin = "2.5cm"
-bot_margin = top_margin
-left_margin = top_margin
-right_margin = left_margin
+top_margin, bot_margin, left_margin, right_margin = "2.5cm", "2.5cm", "2.5cm", "2.5cm"
 
 column_spacing = "10pt"
 row_spacing = "1.5" 
 
-# Front page.
-## Setting title to None also ignores authors and date.
+
+
+###############################################################################
+# 
+#    Custom Packages
+#
+###############################################################################
+
+"""
+Examples:
+rotating (Paket um Textteile drehen zu können)
+lscape (Paket um Seite im Querformat anzuzeigen)
+"""
+
+# Format: {"biblatex": ["backend=biber", "style=alphabetic"], "rotating": []}
+custom_packages = {}
+
+
+
+###############################################################################
+# 
+#    Bibliography
+#
+###############################################################################
+# Bibliography.
+bib_files = ["references.bib"]
+# http://ctan.mirrorcatalogs.com/macros/latex/contrib/biblatex/doc/biblatex.pdf
+bibliography_style = "numeric"
+sorting_style = None # "none"
+autocite = "inline" #footnote
+
+
+###############################################################################
+# 
+#    Minted
+#
+###############################################################################
+# other options: "linenos", "numberblanklines=false", "style=bw"
+minted_default = ["frame=lines", "breaklines=true", "xleftmargin=30pt", "xrightmargin=30pt", "framesep=5pt", "fontsize=\\footnotesize"]
+print_document = False
+
+###############################################################################
+# 
+#    Title Page
+#
+###############################################################################
+
 title = "Systemnahe Programmierung"
 authors = ["Julien Hadley Jack", "Sebastian Dernbach"]
 date = r"\today"
 
-# Sprache
+###############################################################################
+# 
+#    Text Snippets For Translation
+#
+###############################################################################
 deutsch = {"language": "german",
 			"deckblattabschlusshinleitung": "für die Prüfung zum",
 			"artikelstudiengang": "der",

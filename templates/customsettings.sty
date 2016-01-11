@@ -1,3 +1,9 @@
+{#
+Further reading:
+https://www.sharelatex.com/learn/German
+https://www.sharelatex.com/learn/Management_in_a_large_project
+#}
+
 % Translates input encodings into a 'LATEX internal language’.
 % http://www.ctan.org/pkg/inputenc
 \usepackage[utf8]{inputenc}
@@ -40,12 +46,15 @@
 % Advanced options for inline and display quotations
 % http://www.ctan.org/pkg/csquotes
 \usepackage[autostyle=true,         % continuously adapts the qute style to the current language
-            german=quotes           %	
+            german=quotes           %     
 ]{csquotes}
 
+{% if print_document %}
 % Driver independent access to colors (see also color)
+% make document grayscale for printing
 % http://www.ctan.org/pkg/xcolor
-% \usepackage{xcolor}
+\usepackage[gray]{xcolor}
+{% endif %}
 
 % Enhanced support for graphics
 % http://ctan.org/pkg/graphicx
@@ -89,45 +98,49 @@
             footnote                % prints the full name the first time in the footnote
 ]{acronym}
 
+{% if glossaries_found %}
 % Create glossaries and lists of acronyms
 % http://www.ctan.org/pkg/glossaries
-\usepackage[%nonumberlist,	% supresses a list of entry locations
-			toc				% adds the glossaries to the toc
+\usepackage[%nonumberlist,    % supresses a list of entry locations
+                  toc                     % adds the glossaries to the toc
 ]{glossaries}
 % http://tex.stackexchange.com/questions/224072/how-to-install-language-modules-for-the-glossaries-package
+{% endif %}
 
 {#
+{% raw %}
 % typset source code listings
 % http://www.ctan.org/pkg/listings
 % \usepackage{listings}
 % \definecolor{LinkColor}{HTML}{00007A}
 % \definecolor{ListingBackground}{HTML}{FCF7DE}
 % \lstset{%
-% 		language=Java,			% Standardsprache des Quellcodes
-% 		%numbers=left,			% Zeilennummern links
-% 		stepnumber=1,			% Jede Zeile nummerieren.
-% 		numbersep=5pt,			% 5pt Abstand zum Quellcode
-% 		numberstyle=\tiny,		% Zeichengrösse 'tiny' für die Nummern.
-% 		breaklines=true,		% Zeilen umbrechen wenn notwendig.
-% 		breakautoindent=true,	% Nach dem Zeilenumbruch Zeile einrücken.
-% 		postbreak=\space,		% Bei Leerzeichen umbrechen.
-% 		tabsize=2,				% Tabulatorgrösse 2
-% 		basicstyle=\ttfamily\footnotesize, % Nichtproportionale Schrift, klein für den Quellcode
-% 		showspaces=false,		% Leerzeichen nicht anzeigen.
-% 		showstringspaces=false,	% Leerzeichen auch in Strings ('') nicht anzeigen.
-% 		extendedchars=true,		% Alle Zeichen vom Latin1 Zeichensatz anzeigen.
-% 		captionpos=b,			% sets the caption-position to bottom
-% 		backgroundcolor=\color{ListingBackground}, % Hintergrundfarbe des Quellcodes setzen.
-% 		xleftmargin=0pt,		% Rand links
-% 		xrightmargin=0pt,		% Rand rechts
-% 		frame=single,			% Rahmen an
-% 		frameround=ffff,
-% 		rulecolor=\color{darkgray},	% Rahmenfarbe
-% 		fillcolor=\color{ListingBackground}
+%           language=Java,                % Standardsprache des Quellcodes
+%           %numbers=left,                % Zeilennummern links
+%           stepnumber=1,                 % Jede Zeile nummerieren.
+%           numbersep=5pt,                % 5pt Abstand zum Quellcode
+%           numberstyle=\tiny,            % Zeichengrösse 'tiny' für die Nummern.
+%           breaklines=true,        % Zeilen umbrechen wenn notwendig.
+%           breakautoindent=true,   % Nach dem Zeilenumbruch Zeile einrücken.
+%           postbreak=\space,       % Bei Leerzeichen umbrechen.
+%           tabsize=2,                    % Tabulatorgrösse 2
+%           basicstyle=\ttfamily\footnotesize, % Nichtproportionale Schrift, klein für den Quellcode
+%           showspaces=false,       % Leerzeichen nicht anzeigen.
+%           showstringspaces=false, % Leerzeichen auch in Strings ('') nicht anzeigen.
+%           extendedchars=true,           % Alle Zeichen vom Latin1 Zeichensatz anzeigen.
+%           captionpos=b,                 % sets the caption-position to bottom
+%           backgroundcolor=\color{ListingBackground}, % Hintergrundfarbe des Quellcodes setzen.
+%           xleftmargin=0pt,        % Rand links
+%           xrightmargin=0pt,       % Rand rechts
+%           frame=single,                 % Rahmen an
+%           frameround=ffff,
+%           rulecolor=\color{darkgray},   % Rahmenfarbe
+%           fillcolor=\color{ListingBackground}
 % }
 % 
 % \lstloadlanguages{PHP,Python,Java,C,C++,bash}
-#}
+{% endraw %}
+-#}
 
 \usepackage{ {{ font_type }} }
 
@@ -135,27 +148,59 @@
 % http://www.ctan.org/pkg/upquote
 \usepackage{upquote}
 
+{#
+% Doesn't work with captions in code snippets
 % Make the font size in captions smaller
-\addtokomafont{caption}{\small}
+%\addtokomafont{caption}{\small}
+#}
+\usepackage[font=small]{caption}
+\usepackage{subcaption}
 
+{% if citations_found %}
 % Bibliographies
 % http://www.ctan.org/pkg/biblatex
 \usepackage[backend=biber,          % if problems exist, switch to biblatex
             bibwarn=true,           % report warnings issued by the backend
             bibencoding=utf8,       % specifies the encoding of the bib files (else ascii)
-            {%- if snippets["language"] == "german" %}
+            {%- if language == "german" %}
             sortlocale=de_DE,       % global sorting locale
-            {%- elif snippets["language"] == "english" %}
+            {%- elif language == "english" %}
             sortlocale=en_US,
             {%- endif %}
-            style=alphabetic  %Zitierstil. Siehe http://ctan.mirrorcatalogs.com/macros/latex/contrib/biblatex/doc/biblatex.pdf
+            style={{ bibliography_style }},
+            {%- if sorting_style %}
+            sorting={{ sorting_style }},
+            {%- endif %}
+            autocite= {{ autocite }}
 ]{biblatex}
+{% endif %}
 
-{% for file in bib_files %}
-\addbibresource{ {{ file }} }
-{% endfor %}
+% https://www.ctan.org/pkg/pgf
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepackage{graphicx}
+\usepackage{wrapfig}
 
+\usepackage[update,append]{epstopdf}
 
+% cmark, xmark
+\usepackage{pifont}
+
+% landscape
+\usepackage{pdflscape}
+
+% change image extension order
+\usepackage{grfext}
+\AtBeginDocument{
+  \PrependGraphicsExtensions*{.pdf,.PDF,.eps,.EPS,.png,.PNG,.jpg,.jpeg,.JPG,.JPEG}
+  \PrintGraphicsExtensions
+}
+
+% change spacing for toc
+\usepackage{tocloft}
+\setlength\cftparskip{0pt}
+%\setlength\cftbeforechapskip{0pt}
 
 %%********************************************
 %% Math packages
@@ -201,22 +246,32 @@
 \newcommand{\NormalTok}[1]{{#1}}
 {% endraw %}
 
+% https://www.ctan.org/pkg/listings
+\usepackage{listings}
+
+% http://ctan.org/pkg/silence
+
+
+% need newfloat because float@listhead is deprecated
+% \usepackage{caption}
+
+
+{% if code_found %}
+% Uses pygments to make code beautiful
+% http://tug.ctan.org/tex-archive/macros/latex/contrib/minted/minted.pdf
+% \usepackage[newfloat, outputdir=output]{minted}  
+\usepackage[chapter]{minted}  
+\setminted{ {{ minted_default | join(", ") }} }
+{% endif %}
 
 {#
 
-{% if code_blocks_found %}
-% Uses pygments to make code beautiful: http://tug.ctan.org/tex-archive/macros/latex/contrib/minted/minted.pdf
-\usepackage{minted}  
-{% endif %}
-
-
-% \usepackage[colorlinks=false, pdfborder={0 0 0}]{hyperref} % Allow clicking references and the table of contents in pdfs.
+% \usepackage[colorlinks=false, pdfborder={0 0 0}]{hyperref}
+% Allow clicking references and the table of contents in pdfs.
 \usepackage{cleveref} % Adds fig/formula etc. before references (use \cref).
 #}
 
-{#
-These are the settings from pandoc
-#}
+{# These are the settings from pandoc #}
 {% raw %}
 %\usepackage{lmodern}
 \usepackage{amssymb,amsmath}
@@ -235,3 +290,11 @@ These are the settings from pandoc
 % framed or shaded regions that can break across pages
 % http://www.ctan.org/pkg/framed
 \usepackage{framed}
+
+{% for package, options in custom_packages.items() -%}
+{% if options -%}
+\usepackage[{{ options|join(", ") }}]{ {{ package }} }
+{% else -%}
+\usepackage{ {{ package }} }
+{% endif -%}
+{% endfor -%}

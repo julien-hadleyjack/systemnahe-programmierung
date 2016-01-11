@@ -1,5 +1,4 @@
-$out_dir = "output";
-@default_files = ("praxisbericht-docker.tex");
+@default_files = ("systemnahe-programmierung.tex");
 
 $pdf_mode = 1;
 $dvi_mode = 0;
@@ -9,7 +8,7 @@ $recorder = 1;
 
 $bibtex_use = 2; # remove .bbl from output on clean
 # remove all temporary files which are not removed automatically from output on clean
-@generated_exts = qw(fls lof lot toc glg glo gls ist lol run.xml synctex.gz);
+@generated_exts = qw(fls lof lot toc glg glo gls ist lol run.xml synctex.gz out pyg aux fls);
 
 add_cus_dep('glo', 'gls', 0, 'run_makeglossaries');
 add_cus_dep('acn', 'acr', 0, 'run_makeglossaries');
@@ -22,23 +21,4 @@ sub run_makeglossaries {
   return $return;
 }
 
-$pdflatex = 'internal mypdflatex %D %O %S';
-
-sub mypdflatex {
-  use File::Copy qw(copy);
-
-  my $file = shift;
-  my ($base_name, $path) = fileparse( $file );
-  my $synctexfile = $path . ($base_name =~ s/\.[^.]+$//r) . ".synctex.gz";
-  my $new_dir = $path . "../";
-  my @args = @_;
-  unshift(@args, "-synctex=1");
-
-  $return = system 'pdflatex', @args;
-
-  copy $file, $new_dir;
-  copy $synctexfile, $new_dir;
-
-  return $return;
-}
-
+$pdflatex = 'pdflatex -shell-escape -interaction=nonstopmode -halt-on-error -file-line-error -synctex=1 %O %S';

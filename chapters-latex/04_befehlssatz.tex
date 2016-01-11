@@ -1,0 +1,244 @@
+%!TEX root = ../systemnahe-programmierung.tex
+
+\chapter{Befehlssatz}\label{befehlssatz}
+
+Dies ist ein Ausszug aus dem Befehlssatz\footnote{(o.V.) (o.J.) alle Befehle der
+  8051-Mikrocontroller-Familie,
+  http://www.self8051.de/alle-Befehle-des-8051-Mikrocontroller,13290.html, Einsichtnahme:
+  27.01.2015.}.
+
+\begin{longtable}[c]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.25\columnwidth}\raggedright\strut
+\textbf{Befehl}
+\strut\end{minipage} & \begin{minipage}[b]{0.69\columnwidth}\raggedright\strut
+\textbf{Beschreibung}
+\strut\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{ACALL <addr11>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Ruft die Subroutine an der Adresse \mintinline{text}{<addr11>} auf
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{ADD <A>,<Operand>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Addiert den \mintinline{text}{<Operand>} zum Inhalt des Akkumulators \mintinline{text}{<A>} hinzu
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{ADDC <A>,<Operand>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Addiert den \mintinline{text}{<Operand>} und das Übertragsbit zum Inhalt des Akkumulators \mintinline{text}{<A>}
+hinzu
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{AJMP <addr11>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springt zu Adresse \mintinline{text}{<addr11>}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{ANL <Zielbyte>, <Quellenbyte>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Speichert eine bitweise logische UND-Verknüpfung zwischen dem \mintinline{text}{<Zielbyte>} und dem
+\mintinline{text}{<Quellenbyte>} im \mintinline{text}{<Zielbyte>}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{CJNE <Operand1>,} \mintinline{text}{<Operand2>,<rel>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springe zu \mintinline{text}{<rel>} falls die Werte \mintinline{text}{<Operand1>} und \mintinline{text}{<Operand2>}
+ungleich sind
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{CLR <bit>/<A>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Löscht das Bit \mintinline{text}{<bit>} bzw. den Akkumulator \mintinline{text}{<A>}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{CPL <bit>/<A>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Komplementiert das Bit \mintinline{text}{<bit>} bzw. den Akkumulator \mintinline{text}{<A>}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{DA <A>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Korrigiere den Dezimalwert des Akkumulators \mintinline{text}{<A>} nach einer Addition
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{DEC <byte>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Dekrementiere \mintinline{text}{<byte>} um 1
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{DIV <A>,<B>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Dividiere Akkumulator \mintinline{text}{<A>} durch Register \mintinline{text}{<B>}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{DJNZ <byte>,<rel>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Dekrementiere \mintinline{text}{<byte>} um 1 und springe zu \mintinline{text}{<rel>} wenn das \mintinline{text}{<byte>}
+nicht Null ist
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{INC <byte>/<DPTR>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Inkrementiere \mintinline{text}{<byte>} bzw. \mintinline{text}{<DPTR>} um 1
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{JB <bit>,<rel>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springe zu \mintinline{text}{<rel>}, wenn \mintinline{text}{<byte>} gesetzt ist (=1)
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{JBC <bit>,<rel>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springe zu \mintinline{text}{<rel>}, wenn \mintinline{text}{<byte>} gesetzt ist (=1) und lösche dieses
+anschließend
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{JC <rel>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springe zu \mintinline{text}{<rel>}, wenn das Übertragsbit gesetzt ist (=1)
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{JMP <A>+<DPTR>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Addiere den Akkumulator \mintinline{text}{<A>} zum Datenanzeiger \mintinline{text}{<DPTR>} und lade das Ergebnis
+in den Programmzähler
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{JNB <bit>,<rel>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springe zu \mintinline{text}{<rel>}, wenn \mintinline{text}{<byte>} nicht gesetzt ist (=0)
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{JNC <rel>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springe zu \mintinline{text}{<rel>}, wenn das Übertragsbit nicht gesetzt ist (=0)
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{JNZ <rel>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springe zu \mintinline{text}{<rel>}, wenn der Akkumulator nicht Null ist
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{JZ <rel>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springe zu \mintinline{text}{<rel>}, wenn der Akkumulator Null ist
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{LCALL <addr16>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Ruft bedingungslos Subroutine an der Adresse \mintinline{text}{<addr16>} auf
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{LJMP <addr16>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springt bedingungslos zur Adresse \mintinline{text}{<addr16>}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{MOV <Zielbyte>,} \mintinline{text}{<Quellenbyte>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Kopiere das \mintinline{text}{<Quellenbyte>} in das \mintinline{text}{<Zielbyte>}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{MOV <Zielbit>,} \mintinline{text}{<Quellenbit>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Kopiere das \mintinline{text}{<Quellenbit>} in das \mintinline{text}{<Zielbit>}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{MOV <DPTR>,<data16>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Lade die Konstante \mintinline{text}{<data16>} in den Datenzeiger \mintinline{text}{<DPTR>}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{MUL <A>,<B>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Multipliziere den Akkumulator \mintinline{text}{<A>} zum Register \mintinline{text}{<B>}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{NOP}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Setze Programm mit folgendem Befehl fort
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{ORL <Zielbyte>,} \mintinline{text}{<Quellenbyte>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Speichert eine bitweise logische ODER-Verknüpfung zwischen dem \mintinline{text}{<Zielbyte>} und dem
+\mintinline{text}{<Quellenbyte>} im \mintinline{text}{<Zielbyte>}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{POP <byte>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Bringe den Wert vom Stack Pointer zum Byte \mintinline{text}{<byte>} und dekrementiere den Stack Pointer
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{PUSH <byte>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Kopiere den Wert vom Byte \mintinline{text}{<byte>} in den Stack Pointer und inkrementiere den Stack
+Pointer
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{RET}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springt aus der Subroutine zurück
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{RETI}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springe aus dem Interrupt zurück
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{RL <A>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Schiebe die Bits des Akkumulators \mintinline{text}{<A>} nach links
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{RLC <A>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Schiebe die Bits samt Übertragsbit des Akkumulators \mintinline{text}{<A>} nach links
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{RR <A>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Schiebe die Bits des Akkumulators \mintinline{text}{<A>} nach rechts
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{RRC <A>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Schiebe die Bits samt Übertragsbit des Akkumulators \mintinline{text}{<A>} nach rechts
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{SETB <bit>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Setze das Bit \mintinline{text}{<bit>}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{SJMP <rel>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Springe unbedingt zu \mintinline{text}{<rel>}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{SUBB <A>,<Operand>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Subtrahiere den Operanten \mintinline{text}{<Operand>} vom Akkumulator \mintinline{text}{<A>}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{SWAP <A>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Vertausche Halbbytes im Akkumulator \mintinline{text}{<A>}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{XCH <A>,<Byte>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Vertausche das Byte \mintinline{text}{<Byte>} im Akkumulator \mintinline{text}{<A>}
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\mintinline{text}{XRL <Zielbyte>,} \mintinline{text}{<Quellenbyte>}
+\strut\end{minipage} & \begin{minipage}[t]{0.69\columnwidth}\raggedright\strut
+Speichert eine bitweise logische Exklusiv-ODER-Verknüpfung zwischen dem \mintinline{text}{<Zielbyte>} und
+dem \mintinline{text}{<Quellenbyte>} im \mintinline{text}{<Zielbyte>}
+\strut\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
